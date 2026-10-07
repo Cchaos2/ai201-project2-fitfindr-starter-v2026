@@ -57,6 +57,12 @@
      on, and if you don't decide it here you'll discover it as a crash in
      Milestone 5. -->
 
+**(Findings in Milestone 1)**
+- There are 11 fields in a listing: id, title, description, category, style_tags, size, condition, price, colors, brand, platform.
+- The brand can be null
+- A wardrobe item has 6 fields: id, name, category, colors, style_tags, notes.
+- There are queries that the data can not match.
+
 ### `search_listings`
 
 - **What it does:**
