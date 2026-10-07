@@ -45,6 +45,12 @@
 
 ---
 
+**(Findings in Milestone 1)**
+- There are 11 fields in a listing: id, title, description, category, style_tags, size, condition, price, colors, brand, platform.
+- The brand can be null
+- A wardrobe item has 6 fields: id, name, category, colors, style_tags, notes.
+- There are queries that the data can not match.
+
 ## Tool Inventory
 
 <!-- Four lines per tool. This is worth 2 points and it's the single most
@@ -57,32 +63,26 @@
      on, and if you don't decide it here you'll discover it as a crash in
      Milestone 5. -->
 
-**(Findings in Milestone 1)**
-- There are 11 fields in a listing: id, title, description, category, style_tags, size, condition, price, colors, brand, platform.
-- The brand can be null
-- A wardrobe item has 6 fields: id, name, category, colors, style_tags, notes.
-- There are queries that the data can not match.
-
 ### `search_listings`
 
-- **What it does:**
-- **Inputs:** <!-- name and type each: `max_price` (float), not "a price" -->
-- **Returns:**
-- **When it has nothing:**
+- **What it does:** Filters the listing by a price ceiling and a size, then ranks by the number of keywords that appears.
+- **Inputs:** `description` (str), `size` (str or None), `max_price` (float or None).
+- **Returns:** A list of at most 10 listing dicts, best match first. Each listing has id, title, description, etc.
+- **When it has nothing:** An empty list `[]`.
 
 ### `suggest_outfit`
 
-- **What it does:**
-- **Inputs:**
-- **Returns:**
-- **When it has nothing:**
+- **What it does:** Asks the model for outfits that combine an item with pieces from the wardrobe of the user.
+- **Inputs:** `new_item` (dict), `wardrobe` (dict)
+- **Returns:** A string with outfits suggestions 
+- **When it has nothing:** If the wardrobe has no items, then it is returned a non-empty string of general styling adivce
 
 ### `create_fit_card`
 
-- **What it does:**
-- **Inputs:**
-- **Returns:**
-- **When it has nothing:**
+- **What it does:** Asks the model to write a short social media caption about the item and the outfit
+- **Inputs:** `outfit` (str), `new_item` (dict)
+- **Returns:** A string that mentions the item, its price and its platform.
+- **When it has nothing:** If `outfit` is empty, a string saying no fit could be written
 
 ---
 
@@ -99,7 +99,8 @@
      The grader checks your code against what you claim here, so the file and
      function have to be real. -->
 
-**Branch rule:**
+**Branch rule:** If search_listings returns an empty list, put a message in session["error"] and stop. Otherwise, take
+the first result and go to suggest_outfit.
 
 **Where it lives:** `agent.py::run_agent`
 
