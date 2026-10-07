@@ -178,15 +178,15 @@ Scored these vintage Levi's 501 jeans in a great medium wash on depop for just $
 
 **Moment 1**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* I gave Claude the size-matching helper code my professor wrote in class and asked it to check the code against the real listings data.
+- *What came back:* It found that `p.strip().upper` was missing its parentheses, which crashes with an AttributeError as soon as a query includes a size. It also showed that a plain keyword count ranked "Y2K Baby Tee" above "Graphic Tee" for the query "vintage graphic tee".
+- *What I changed:* I fixed the line to `p.strip().upper()` and added a rule in `search_listings` that counts a keyword in the title twice, so the Graphic Tee is ranked first.
 
 **Moment 2**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* I showed Claude my first Tool Inventory entry for `search_listings` and asked what I still had to do.
+- *What came back:* It pointed out that my Returns line said "Each listing has id, title, description, etc.", and that a vague return value does not earn the points. 
+- *What I changed:* I rewrote the Returns line to list all eleven fields of a listing dict
 
 <!-- ═══════════════════════ UNIT 4 — THE TEST ═══════════════════════
 
