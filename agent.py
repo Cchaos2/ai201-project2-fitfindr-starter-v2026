@@ -17,7 +17,44 @@ import config
 import trace
 from tools import search_listings, suggest_outfit, create_fit_card
 from generate import ModelUnavailable
+import re
 
+
+def _parse_query(query: str) -> dict:
+    text = query
+    max_price = None
+    worded = r"(?:under|below|less than|up to|max)\s*\$?\s*(\d+(?:\.\d+)?)"
+    bare = r"\$\s*(\d+(?:\.\d+)?)"
+    m = re.search(worded, text, re.I) or re.search(bare, text)
+    if m:
+        max_price = float(m.group(1))
+        text = text.replace(m.group(0), " ")
+
+    size = None
+    sizes = r"\bsize\s+(US\s*\d+(?:\.\d+)?|\d+(?:\.\d+)?|[A-Za-z0-9/]+)"
+    m = re.search(sizes, text, re.I)
+    if m:
+        size = re.sub(r"\s+", " ", m.group(1)).upper()
+        text = text.replace(m.group(0), " ")
+
+    description = re.sub(r"[\s,]+", " ", text).strip()
+    return {"description": description, "size": size, "max_price": max_price}
+
+def _empty_message(parsed: dict) -> str:
+    filters = []
+    tips = []
+    if parsed.get("size"):
+        filters.append(f"size {parsed['size']}")
+        tips.append("remove the size")
+    if parsed.get("max_price") is not None:
+        filters.append(f"under ${parsed['max_price']:g}")
+        tips.append("raise the price limit")
+    tips.append("use different words")
+
+    looked_for = f"'{parsed.get('description')}'"
+    if filters:
+        looked_for += " (" + ", ".join(filters) + ")"
+    return f"Nothing matched {looked_for}. You could " + ", or ".join(tips) + "."
 
 # ── session state ─────────────────────────────────────────────────────────────
 
@@ -106,10 +143,41 @@ def run_agent(query: str, wardrobe: dict) -> dict:
         than a stack trace. The import is already at the top of this file.
     """
     session = new_session(query, wardrobe)
+    searched = False
+    count = 0
 
-    # TODO: delete these two lines and build the loop.
-    session["error"] = "The planning loop isn't built yet — see the TODO in agent.py."
-    return session
+    while True:
+        count += 1
+        trace.check_iterations(count)  # stop condition
+
+        if not session["parsed"]:
+            session["parsed"] = _parse_query(session["query"])
+
+        elif not searched:
+            p = session["parsed"]
+            session["search_results"] = search_listings(
+                p["description"], p["size"], p["max_price"]
+            )
+            searched = True
+            if not session["search_results"]:  # THE BRANCH
+                session["error"] = _empty_message(session["parsed"])
+                return session
+
+        elif session["selected_item"] is None:
+            session["selected_item"] = session["search_results"][0]
+
+        elif session["outfit_suggestion"] is None:
+            session["outfit_suggestion"] = suggest_outfit(
+                session["selected_item"], session["wardrobe"]
+            )
+
+        elif session["fit_card"] is None:
+            session["fit_card"] = create_fit_card(
+                session["outfit_suggestion"], session["selected_item"]
+            )
+
+        else:
+            return session
 
 
 # ── running it directly ───────────────────────────────────────────────────────

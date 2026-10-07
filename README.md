@@ -40,7 +40,11 @@
 ## What This Does
 
 <!-- Three or four sentences: what a user asks for, and what they get back. -->
-
+FitFindr is an assistant that helps users find second-hand clothes. You can describe what you’re looking for in your 
+own words, like “vintage graphic tee under $30,” and you can also add your size if you want. The agent searches 
+through 40 listings, finds the one that seems like the best match, suggests a few outfits using clothes you already have,
+and writes a short caption for the item. If it can’t find anything that works, it stops and tells you what you could change,
+such as removing the size requirement or increasing your budget.
 
 
 ---
@@ -120,9 +124,21 @@ the first result and go to suggest_outfit.
 **One full query**
 
 ```
-$ python app.py ask '...'
+$ python app.py ask 'vintage graphic tee under $30'
 ```
+suggest_outfit received id=lst_006
 
+  Found:    Graphic Tee — 2003 Tour Bootleg Style — $24.0 on depop
+
+  Outfit:   Buy it. It fits right into your grunge aesthetic and bridges your existing pieces.
+
+Outfit 1 (Casual Streetwear): Pair the graphic tee with your baggy dark-wash jeans, brown leather belt, and chunky white sneakers. Throw your slightly cropped black denim jacket on top and finish with the black crossbody bag.
+
+Outfit 2 (Edgy Casual): Tuck the tee into your wide-leg khaki trousers, add the black combat boots, and layer your black cropped zip hoodie unzipped over the top.
+
+  Fit card: Found this sick 2003 tour bootleg style graphic tee on depop for just $24 and I'm obsessed. It fits right into your grunge aesthetic and bridges your existing pieces. Can't wait to style this with baggy jeans and combat boots!
+
+0 model calls this session, 2 served from cache
 
 
 **The three tools, tested one at a time**
