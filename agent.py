@@ -57,6 +57,19 @@ def _empty_message(parsed: dict) -> str:
         looked_for += " (" + ", ".join(filters) + ")"
     return f"Nothing matched {looked_for}. You could " + ", or ".join(tips) + "."
 
+def _kv(d: dict) -> str:
+    """Show a dict as key=value text, so the trace prints the values, not just the keys."""
+    return ", ".join(f"{k}={v!r}" for k, v in d.items())
+
+
+def _model_down_message(tool_name: str, item: dict, exc: Exception) -> str:
+    return (
+        f"The search worked and found {item.get('title')} "
+        f"(${item.get('price'):g} on {item.get('platform')}), but {tool_name} "
+        f"couldn't reach the model, so there is no outfit or fit card. "
+        f"{exc} Then run the same query again."
+    )
+
 # ── session state ─────────────────────────────────────────────────────────────
 
 def new_session(query: str, wardrobe: dict) -> dict:
@@ -153,33 +166,62 @@ def run_agent(query: str, wardrobe: dict) -> dict:
 
         if not session["parsed"]:
             session["parsed"] = _parse_query(session["query"])
+            trace.step("parse_query (regex)", inputs=session["query"],
+                       returned=_kv(session["parsed"]))
 
         elif not searched:
             p = session["parsed"]
-            session["search_results"] = call_tool("search_listings", {
+            args = {
                 "description": p["description"],
                 "size": p["size"],
                 "max_price": p["max_price"],
-            })
+            }
+            session["search_results"] = call_tool("search_listings", args)
             searched = True
             if not session["search_results"]:  # THE BRANCH
                 session["error"] = _empty_message(session["parsed"])
+                trace.step("search_listings (via MCP)", inputs=_kv(args),
+                           returned=session["search_results"],
+                           note="branch: empty, stopping before suggest_outfit")
                 return session
+            trace.step("search_listings (via MCP)", inputs=_kv(args),
+                       returned=session["search_results"],
+                       note=f"branch: {len(session['search_results'])} results, continuing")
 
         elif session["selected_item"] is None:
             session["selected_item"] = session["search_results"][0]
+            trace.step("select_item", inputs="search_results[0]",
+                       returned=session["selected_item"],
+                       note=f"selected id={session['selected_item']['id']}")
 
         elif session["outfit_suggestion"] is None:
-            session["outfit_suggestion"] = suggest_outfit(
-                session["selected_item"], session["wardrobe"]
-            )
+            item = session["selected_item"]
+            n_items = len((session["wardrobe"] or {}).get("items") or [])
+            inputs = f"new_item={item['id']}, wardrobe={n_items} items"
+            try:
+                session["outfit_suggestion"] = suggest_outfit(item, session["wardrobe"])
+            except ModelUnavailable as exc:
+                session["error"] = _model_down_message("suggest_outfit", item, exc)
+                trace.step("suggest_outfit", inputs=inputs, returned="ModelUnavailable",
+                           note="model unreachable, stopping")
+                return session
+            trace.step("suggest_outfit", inputs=inputs,
+                       returned=session["outfit_suggestion"])
 
         elif session["fit_card"] is None:
-            session["fit_card"] = create_fit_card(
-                session["outfit_suggestion"], session["selected_item"]
-            )
+            item = session["selected_item"]
+            inputs = f"new_item={item['id']}, outfit={session['outfit_suggestion'][:60]!r}"
+            try:
+                session["fit_card"] = create_fit_card(session["outfit_suggestion"], item)
+            except ModelUnavailable as exc:
+                session["error"] = _model_down_message("create_fit_card", item, exc)
+                trace.step("create_fit_card", inputs=inputs, returned="ModelUnavailable",
+                           note="model unreachable, stopping")
+                return session
+            trace.step("create_fit_card", inputs=inputs, returned=session["fit_card"])
 
         else:
+            trace.step("done", note="all three tools ran, returning the session")
             return session
 
 

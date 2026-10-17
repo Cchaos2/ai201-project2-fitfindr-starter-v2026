@@ -267,23 +267,148 @@ that produced it:
      the same length, your branch isn't working — and this is the fastest way
      anyone will ever find that out. -->
 
-**Happy path**
+Produced by `agent.py::run_agent`, with one `trace.step()` call per pass of
+the loop. `search_listings` runs through MCP (`mcp_client.call_tool` →
+`mcp_server.py`), which is why its step is labelled `(via MCP)`.
+
+**Happy path** — `python app.py ask 'vintage graphic tee under $30' --trace`
 
 ```
-
+[1] parse_query (regex)
+      in:  vintage graphic tee under $30
+      out: description='vintage graphic tee', size=None, max_price=30.0
+[2] search_listings (via MCP)
+      in:  description='vintage graphic tee', size=None, max_price=30.0
+      out: 10 items: Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey, Y2K Baby Tee — Butterfly Print … +7 more
+      →    branch: 10 results, continuing
+[3] select_item
+      in:  search_results[0]
+      out: Graphic Tee — 2003 Tour Bootleg Style ($24.0, depop)
+      →    selected id=lst_006
+suggest_outfit received id=lst_006
+[4] suggest_outfit
+      in:  new_item=lst_006, wardrobe=10 items
+      out: Buy it. It fits right into your grunge aesthetic and bridges your existing pieces.   Outfit 1 (Casual Streetwe…
+[5] create_fit_card
+      in:  new_item=lst_006, outfit='Buy it. It fits right into your grunge aesthetic and bridges'
+      out: Found this sick 2003 tour bootleg style graphic tee on depop for just $24 and I'm obsessed. It fits right into…
+[6] done
+      →    all three tools ran, returning the session
 ```
 
-**Empty search**
+**Empty search** `python app.py ask 'designer ballgown size XXS under $5' --trace`
 
 ```
+[1] parse_query (regex)
+      in:  designer ballgown size XXS under $5
+      out: description='designer ballgown', size='XXS', max_price=5.0
+[2] search_listings (via MCP)
+      in:  description='designer ballgown', size='XXS', max_price=5.0
+      out: [] (empty)
+      →    branch: empty, stopping before suggest_outfit
+```
+
+The empty run stops after step 2. The branch in `run_agent` sees `[]` from
+`search_listings` and returns before `suggest_outfit` is called, so the trace
+is 2 steps instead of 6. Step 3 and step 4 also show the item that was
+selected (`lst_006`) is the item `suggest_outfit` received (`lst_006`), which
+is what criterion 3 checks.
+
+### Failure modes, triggered on purpose
+
+**1. Empty search** — `python app.py ask 'designer ballgown size XXS under $5'`
 
 ```
+  Nothing matched 'designer ballgown' (size XXS, under $5). You could remove the size, or raise the price limit, or use different words.
+
+0 model calls this session
+```
+
+Already handled by the branch in `agent.py::run_agent` (`_empty_message`). No
+change needed: it names the filters it used and what to change, and makes no
+model calls.
+
+**2. Empty wardrobe** — `python app.py ask 'denim jacket under $50' --empty-wardrobe`
+
+```
+(running with an empty wardrobe)
+suggest_outfit received id=lst_007
+
+  Found:    Denim Jacket — Light Wash, Cropped — $42.0 on poshmark
+
+  Outfit:   Pair this vintage cropped denim jacket with a classic white crewneck t-shirt and high-waisted black straight-leg jeans. Finish the look with white leather sneakers or black ankle boots for an effortless, streetwear-inspired outfit that works for casual days. Alternatively, layer it over a plain black ribbed midi dress with canvas sneakers for an easy, balanced mix of casual and feminine.
+
+  Fit card: Found this cropped light wash denim jacket on poshmark and I'm obsessed. It was only $42 and is in such amazing condition. Can't wait to wear it with all my high-waisted jeans this fall!
+
+2 model calls this session, 243 prompt + 123 output tokens
+```
+
+Already handled in `tools.py::suggest_outfit`: when `wardrobe["items"]` is
+empty it switches to a prompt asking for outfits built from common basics, so
+it returns general advice (white tee, black jeans, sneakers) instead of
+crashing or returning an empty string.
+
+**3. Model unavailable** — one character of `GEMINI_API_KEY` changed in
+`.env`, and a query whose item had never been run, so the answer could not
+come from the cache.
+
+Before the handler — `python app.py ask 'corduroy pants under $35'`:
+
+```
+suggest_outfit received id=lst_005
+1 model calls this session
+
+ModelUnavailable: The model rejected your API key. Check GEMINI_API_KEY in your .env file, or create a fresh key at aistudio.google.com.
+```
+
+The exception escaped `run_agent` and was only caught by the catch-all in
+`app.py::main`. The session was thrown away, the message did not say which
+step failed or that the search had worked, and under `run_eval.py` the run
+would be logged as a crash.
+
+After the handler (`try/except ModelUnavailable` around `suggest_outfit` and
+`create_fit_card` in `agent.py::run_agent`) — `python app.py ask 'corduroy pants under $30'`:
+
+```
+[1] parse_query (regex)
+      in:  corduroy pants under $30
+      out: description='corduroy pants', size=None, max_price=30.0
+[2] search_listings (via MCP)
+      in:  description='corduroy pants', size=None, max_price=30.0
+      out: 1 items: Low-Rise Cargo Pants — Khaki
+      →    branch: 1 results, continuing
+[3] select_item
+      in:  search_results[0]
+      out: Low-Rise Cargo Pants — Khaki ($27.0, poshmark)
+      →    selected id=lst_011
+suggest_outfit received id=lst_011
+[4] suggest_outfit
+      in:  new_item=lst_011, wardrobe=10 items
+      out: ModelUnavailable
+      →    model unreachable, stopping
+
+  The search worked and found Low-Rise Cargo Pants — Khaki ($27 on poshmark), but suggest_outfit couldn't reach the model, so there is no outfit or fit card. The model rejected your API key. Check GEMINI_API_KEY in your .env file, or create a fresh key at aistudio.google.com. Then run the same query again.
+
+1 model calls this session
+```
+
+The run now stops cleanly at step 4 with `session["error"]` set. The message
+says what broke (`suggest_outfit` could not reach the model), keeps what did
+work (the item found), and says what to do (check the key, then rerun). I used
+`$30` instead of `$35` here so the query had not been cached. Side
+observation: with the ceiling at $30 the corduroy pants ($32) were filtered
+out and the search returned cargo pants, matching only on the word "pants".
+
 
 **On the MCP move:** <!-- what changed in your code, and whether anything
 behaved differently afterwards. If the rewire didn't work, say exactly where it
 broke — the error text and the last thing that worked. That earns the point in
 full. -->
 
+- Swapped the direct call in run_agent for call_tool("search_listings", {...}).
+- Removed search_listings from the tools import, so nothing calls it directly.
+- The returned list was identical to the direct call (True).
+- The empty case still returns [].
 
 
 ---
@@ -363,3 +488,41 @@ full. -->
 ---
 
 📖 **How to run this project: [RUNNING.md](RUNNING.md)**
+
+
+
+# COMMAND 1
+
+python app.py ask 'designer ballgown size XXS under $5'
+
+...
+Nothing matched 'designer ballgown' (size XXS, under $5). You could remove the size, or raise the price limit, or use different words.
+...
+
+# COMMAND 2
+
+python app.py ask 'denim jacket under $50' --empty-wardrobe
+
+...
+(running with an empty wardrobe)
+suggest_outfit received id=lst_007
+
+  Found:    Denim Jacket — Light Wash, Cropped — $42.0 on poshmark
+
+  Outfit:   Pair this vintage cropped denim jacket with a classic white crewneck t-shirt and high-waisted black straight-leg jeans. Finish the look with white leather sneakers or black ankle boots for an effortless, streetwear-inspired outfit that works for casual days. Alternatively, layer it over a plain black ribbed midi dress with canvas sneakers for an easy, balanced mix of casual and feminine.
+
+  Fit card: Found this cropped light wash denim jacket on poshmark and I'm obsessed. It was only $42 and is in such amazing condition. Can't wait to wear it with all my high-waisted jeans this fall!
+
+0 model calls this session, 2 served from cache
+...
+
+# COMMAND 3
+
+python app.py ask 'corduroy pants under $35'
+
+...
+suggest_outfit received id=lst_005
+1 model calls this session
+
+ModelUnavailable: The model rejected your API key. Check GEMINI_API_KEY in your .env file, or create a fresh key at aistudio.google.com.
+...
