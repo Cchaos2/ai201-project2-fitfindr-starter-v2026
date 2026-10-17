@@ -197,29 +197,83 @@ Scored these vintage Levi's 501 jeans in a great medium wash on depop for just $
 
 ## Run Log — Before
 
-<!-- Five criteria, five tries each, in this exact format.
+`python -u run_eval.py --label before 2>&1 | tee results/terminal_before.txt`,
+scored with `python score_run.py before`. Cache off, temperature 0.9.
+Evidence: `results/run_2026-10-17_1810_before.md` (written by
+`run_eval.py::main`) and `results/terminal_before.txt`.
 
-     Five, because your criteria are written out of five. Mark each try PASS
-     or FAIL, count the passes, and read that count against your target — a
-     row targeting 4 of 5 with three PASS cells is MISSED (3/5).
-
-     `python run_eval.py --label before` runs everything and writes the table
-     into results/. Paste it here and fill in the verdicts. -->
+How the rows map to tries:
+- **1, 2:** one query, Try k = repeat k.
+- **3:** five different matching queries, Try k = query k (graphic tee, denim
+  jacket, silk slip dress, track jacket size M, corduroy pants). Each ran five
+  times and passes only if all five match.
+- **4:** three items, five tries each, as rows 4a/4b/4c. A try passes if the
+  fit card has 2–4 sentences, the garment word from the title, `$` + the
+  whole-dollar price, and the platform. Criterion 4 is met only if all three
+  rows reach 4 of 5.
+- **5:** Try k = ceiling k ($15, $20, $25, $30, $40). Each ran five times and
+  passes only if every returned price is at or under the ceiling.
 
 | Criterion | Target | Try 1 | Try 2 | Try 3 | Try 4 | Try 5 | Verdict |
 |---|---|---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |  |  |
+| 1. A matching query completes all three tools | 4 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5) |
+| 2. An impossible query stops before the second tool | 5 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5) |
+| 3. The item found is the item passed on | 5 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5) |
+| 4a. Fit card facts + length — tee ($24, depop) | 4 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5) |
+| 4b. Fit card facts + length — jacket ($42, poshmark) | 4 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5) |
+| 4c. Fit card facts + length — dress ($30, depop) | 4 of 5 | PASS | FAIL | PASS | PASS | PASS | MET (4/5) |
+| 5. The search respects a price ceiling | 5 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5) |
 
-**Real output from one try**, pasted as text, naming the file and function
-that produced it:
+**Real output — criteria 1, 3 and 5, scenario `c1/c3/c4 graphic tee`, try 1**
+(trace from `agent.py::run_agent`; step 2 is `mcp_server.py::search_listings`
+via `mcp_client.call_tool`; the `received id` line is printed by
+`tools.py::suggest_outfit`; step 5 is `tools.py::create_fit_card`):
 
 ```
+[1] parse_query (regex)
+      in:  vintage graphic tee under $30
+      out: description='vintage graphic tee', size=None, max_price=30.0
+[2] search_listings (via MCP)
+      in:  description='vintage graphic tee', size=None, max_price=30.0
+      out: 10 items: Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey, Y2K Baby Tee — Butterfly Print … +7 more
+      →    branch: 10 results, continuing; prices=[24.0, 19.0, 18.0, 26.0, 20.0, 15.0, 18.0, 25.0, 22.0, 27.0]
+[3] select_item
+      in:  search_results[0]
+      out: Graphic Tee — 2003 Tour Bootleg Style ($24.0, depop)
+      →    selected id=lst_006
+suggest_outfit received id=lst_006
+[4] suggest_outfit
+      in:  new_item=lst_006, wardrobe=10 items
+      out: Outfit 1: Pair the graphic tee with the baggy dark-wash jeans, brown leather belt, and black combat boots for …
+[5] create_fit_card
+      in:  new_item=lst_006, outfit='Outfit 1: Pair the graphic tee with the baggy dark-wash jean'
+      out: Scored this 2003 tour bootleg style graphic tee for just $24 on depop and the fit is unreal. It’s in seriously…
+[6] done
+      →    all three tools ran, returning the session
+```
+
+**Real output — criterion 2, scenario `c2 impossible query`, try 1**
+(branch in `agent.py::run_agent`, message from `agent.py::_empty_message`):
 
 ```
+[1] parse_query (regex)
+      in:  designer ballgown size XXS under $5
+      out: description='designer ballgown', size='XXS', max_price=5.0
+[2] search_listings (via MCP)
+      in:  description='designer ballgown', size='XXS', max_price=5.0
+      out: [] (empty)
+      →    branch: empty, stopping before suggest_outfit
+stopped early: Nothing matched 'designer ballgown' (size XXS, under $5). You could remove the size, or raise the price limit, or use different words.
+```
+
+**Real output — criterion 4, the one FAIL (row 4c, try 2)**, from
+`tools.py::create_fit_card`:
+
+```
+Found this gorgeous 90s floral silk midi on depop and I'm obsessed. It was only $30 and the condition is great. Can't wait to layer it over a white tank for daytime or throw an oversized crewneck over it when it gets chilly!
+```
+Has `$30` and `depop`, but no "dress": the card calls it a "90s floral silk
+midi", so the garment-word check fails.
 
 ---
 
@@ -405,10 +459,16 @@ behaved differently afterwards. If the rewire didn't work, say exactly where it
 broke — the error text and the last thing that worked. That earns the point in
 full. -->
 
-- Swapped the direct call in run_agent for call_tool("search_listings", {...}).
-- Removed search_listings from the tools import, so nothing calls it directly.
-- The returned list was identical to the direct call (True).
-- The empty case still returns [].
+- Registered `search_listings` in `mcp_server.py` with `@mcp.tool()`, typed
+  inputs (`description: str`, `size: str | None`, `max_price: float | None`)
+  and a description that states units (USD) and the empty case (`[]`).
+- Swapped the direct call in `agent.py::run_agent` for
+  `call_tool("search_listings", {...})`.
+- Removed `search_listings` from the `tools` import, so nothing calls it directly.
+- Nothing behaved differently: the list returned over MCP was identical to the
+  direct call (`True`), the empty case still came back as `[]` (not `None`),
+  and the agent still selected lst_006. The only visible change is a short
+  delay, because each call starts the server process.
 
 
 ---
@@ -488,41 +548,3 @@ full. -->
 ---
 
 📖 **How to run this project: [RUNNING.md](RUNNING.md)**
-
-
-
-# COMMAND 1
-
-python app.py ask 'designer ballgown size XXS under $5'
-
-...
-Nothing matched 'designer ballgown' (size XXS, under $5). You could remove the size, or raise the price limit, or use different words.
-...
-
-# COMMAND 2
-
-python app.py ask 'denim jacket under $50' --empty-wardrobe
-
-...
-(running with an empty wardrobe)
-suggest_outfit received id=lst_007
-
-  Found:    Denim Jacket — Light Wash, Cropped — $42.0 on poshmark
-
-  Outfit:   Pair this vintage cropped denim jacket with a classic white crewneck t-shirt and high-waisted black straight-leg jeans. Finish the look with white leather sneakers or black ankle boots for an effortless, streetwear-inspired outfit that works for casual days. Alternatively, layer it over a plain black ribbed midi dress with canvas sneakers for an easy, balanced mix of casual and feminine.
-
-  Fit card: Found this cropped light wash denim jacket on poshmark and I'm obsessed. It was only $42 and is in such amazing condition. Can't wait to wear it with all my high-waisted jeans this fall!
-
-0 model calls this session, 2 served from cache
-...
-
-# COMMAND 3
-
-python app.py ask 'corduroy pants under $35'
-
-...
-suggest_outfit received id=lst_005
-1 model calls this session
-
-ModelUnavailable: The model rejected your API key. Check GEMINI_API_KEY in your .env file, or create a fresh key at aistudio.google.com.
-...
