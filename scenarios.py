@@ -1,52 +1,93 @@
 """
 The runs your test needs. ← UNIT 4, MILESTONE 3
 
-Each of your five criteria needs something run against it. A criterion about
-the empty-search branch needs an impossible query. One about the fit card needs
-the same item run more than once. Working that out is Milestone 3's first step,
-and this file is where you write it down.
+`run_eval.py` runs every scenario here five times, with the cache off.
 
-`run_eval.py` runs everything here five times and writes the run log — five
-because your criteria are written out of five.
+How the scenarios map onto my five criteria (criteria.md):
 
-Three scenarios are filled in to show the shape. Add or change whatever your
-own criteria need — these are a starting point, not a fixed set.
+  Criterion 1 (matching query completes, 4 of 5)
+      -> scenario "c1/c3/c4 graphic tee", its five tries.
+  Criterion 2 (impossible query stops before suggest_outfit, 5 of 5)
+      -> scenario "c2 impossible query", its five tries.
+  Criterion 3 (item selected == item suggest_outfit received, 5 of 5,
+               over five DIFFERENT matching queries)
+      -> the five "c3" scenarios. Try k in the run log = query k. A query
+         passes only if all five of its repeats pass.
+  Criterion 4 (fit card: 2-4 sentences, garment word, $price, platform,
+               at least 4 of 5 per item, three items)
+      -> the first three scenarios (tee / jacket / dress), five tries each.
+         Logged as rows 4a, 4b, 4c. Garment word = the noun in the title.
+  Criterion 5 (search respects the price ceiling, 5 of 5)
+      -> the five "tee under $N" scenarios. Try k in the run log = N value k.
+
+One run can be scored against more than one criterion: the graphic tee run
+is a full three-tool run (criterion 1), it shows the id handed from the
+session to suggest_outfit (criterion 3), and it produces a fit card
+(criterion 4). The "criterion" key below is the main one; "also" lists the
+others. run_eval.py ignores "also"; it is here for the reader.
 """
 
 SCENARIOS = [
+    # ── criteria 1, 3, 4 ──────────────────────────────────────────────────
     {
-        # A query the data can match. Criterion 1.
-        "name": "matching query completes",
-        "query": "vintage graphic tee under $30",
+        "name": "c1/c3/c4 graphic tee",
+        "query": "vintage graphic tee under $30",      # -> lst_006, tee, $24, depop
         "wardrobe": "example",
         "criterion": 1,
+        "also": [3, 4],
+        "garment": "tee",
     },
     {
-        # A query nothing can match. Criterion 2 — the branch.
-        "name": "impossible query stops early",
+        "name": "c3/c4 denim jacket",
+        "query": "denim jacket under $50",             # -> lst_007, jacket, $42, poshmark
+        "wardrobe": "example",
+        "criterion": 3,
+        "also": [4],
+        "garment": "jacket",
+    },
+    {
+        "name": "c3/c4 silk slip dress",
+        "query": "silk slip dress in midi length under $40",  # -> lst_013, dress, $30, depop
+        "wardrobe": "example",
+        "criterion": 3,
+        "also": [4],
+        "garment": "dress",
+    },
+    {
+        "name": "c3 track jacket size M",
+        "query": "90s track jacket in size M",         # -> lst_004
+        "wardrobe": "example",
+        "criterion": 3,
+    },
+    {
+        "name": "c3 corduroy pants",
+        "query": "corduroy pants under $35",           # -> lst_005
+        "wardrobe": "example",
+        "criterion": 3,
+    },
+
+    # ── criterion 2 ───────────────────────────────────────────────────────
+    {
+        "name": "c2 impossible query",
         "query": "designer ballgown size XXS under $5",
         "wardrobe": "example",
         "criterion": 2,
     },
+
+    # ── criterion 5 ───────────────────────────────────────────────────────
+    {"name": "c5 tee under $15", "query": "tee under $15", "wardrobe": "example", "criterion": 5, "max_price": 15},
+    {"name": "c5 tee under $20", "query": "tee under $20", "wardrobe": "example", "criterion": 5, "max_price": 20},
+    {"name": "c5 tee under $25", "query": "tee under $25", "wardrobe": "example", "criterion": 5, "max_price": 25},
+    {"name": "c5 tee under $30", "query": "tee under $30", "wardrobe": "example", "criterion": 5, "max_price": 30},
+    {"name": "c5 tee under $40", "query": "tee under $40", "wardrobe": "example", "criterion": 5, "max_price": 40},
+
+    # ── diagnostic, not one of the five ───────────────────────────────────
     {
-        # A user with nothing saved. One of unit 4's three failure modes.
         "name": "empty wardrobe",
         "query": "denim jacket under $50",
         "wardrobe": "empty",
         "criterion": None,
     },
-    # TODO: add what your criteria 3, 4 and 5 need.
-    #
-    # Set "criterion" to the number in criteria.md that the scenario tests.
-    # "criterion": None means a diagnostic run — useful to have, but it isn't
-    # one of your five, and run_eval.py marks it as such in the table.
-    #
-    # For a state criterion, any normal query works — what you're checking is
-    # what ends up in the session, not what the user typed.
-    #
-    # For a fit-card criterion, you probably want the SAME query listed more
-    # than once, or several different items, depending on what your criterion
-    # actually says.
 ]
 
 WARDROBES = ("example", "empty")

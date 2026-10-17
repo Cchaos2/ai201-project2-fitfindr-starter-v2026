@@ -186,7 +186,8 @@ def run_agent(query: str, wardrobe: dict) -> dict:
                 return session
             trace.step("search_listings (via MCP)", inputs=_kv(args),
                        returned=session["search_results"],
-                       note=f"branch: {len(session['search_results'])} results, continuing")
+                       note=f"branch: {len(session['search_results'])} results, continuing; "
+                            f"prices={[r['price'] for r in session['search_results']]}")
 
         elif session["selected_item"] is None:
             session["selected_item"] = session["search_results"][0]
