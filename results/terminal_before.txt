@@ -1,0 +1,1251 @@
+Cache is OFF for this run — that's deliberate.
+
+c1/c3/c4 graphic tee  (example wardrobe)
+  query: vintage graphic tee under $30
+[1] parse_query (regex)
+      in:  vintage graphic tee under $30
+      out: description='vintage graphic tee', size=None, max_price=30.0
+[2] search_listings (via MCP)
+      in:  description='vintage graphic tee', size=None, max_price=30.0
+      out: 10 items: Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey, Y2K Baby Tee — Butterfly Print … +7 more
+      →    branch: 10 results, continuing; prices=[24.0, 19.0, 18.0, 26.0, 20.0, 15.0, 18.0, 25.0, 22.0, 27.0]
+[3] select_item
+      in:  search_results[0]
+      out: Graphic Tee — 2003 Tour Bootleg Style ($24.0, depop)
+      →    selected id=lst_006
+suggest_outfit received id=lst_006
+[4] suggest_outfit
+      in:  new_item=lst_006, wardrobe=10 items
+      out: Outfit 1: Pair the graphic tee with the baggy dark-wash jeans, brown leather belt, and black combat boots for …
+[5] create_fit_card
+      in:  new_item=lst_006, outfit='Outfit 1: Pair the graphic tee with the baggy dark-wash jean'
+      out: Scored this 2003 tour bootleg style graphic tee for just $24 on depop and the fit is unreal. It’s in seriously…
+[6] done
+      →    all three tools ran, returning the session
+  try 1: completed — fit card 224 chars
+[1] parse_query (regex)
+      in:  vintage graphic tee under $30
+      out: description='vintage graphic tee', size=None, max_price=30.0
+[2] search_listings (via MCP)
+      in:  description='vintage graphic tee', size=None, max_price=30.0
+      out: 10 items: Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey, Y2K Baby Tee — Butterfly Print … +7 more
+      →    branch: 10 results, continuing; prices=[24.0, 19.0, 18.0, 26.0, 20.0, 15.0, 18.0, 25.0, 22.0, 27.0]
+[3] select_item
+      in:  search_results[0]
+      out: Graphic Tee — 2003 Tour Bootleg Style ($24.0, depop)
+      →    selected id=lst_006
+suggest_outfit received id=lst_006
+[4] suggest_outfit
+      in:  new_item=lst_006, wardrobe=10 items
+      out: Outfit 1: Pair the graphic tee with your baggy dark wash jeans, chunky white sneakers, and the black crossbody…
+[5] create_fit_card
+      in:  new_item=lst_006, outfit='Outfit 1: Pair the graphic tee with your baggy dark wash jea'
+      out: Just scored this sick 2003 tour bootleg style graphic tee on depop for only $24. The graphics on it are so goo…
+[6] done
+      →    all three tools ran, returning the session
+  try 2: completed — fit card 242 chars
+[1] parse_query (regex)
+      in:  vintage graphic tee under $30
+      out: description='vintage graphic tee', size=None, max_price=30.0
+[2] search_listings (via MCP)
+      in:  description='vintage graphic tee', size=None, max_price=30.0
+      out: 10 items: Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey, Y2K Baby Tee — Butterfly Print … +7 more
+      →    branch: 10 results, continuing; prices=[24.0, 19.0, 18.0, 26.0, 20.0, 15.0, 18.0, 25.0, 22.0, 27.0]
+[3] select_item
+      in:  search_results[0]
+      out: Graphic Tee — 2003 Tour Bootleg Style ($24.0, depop)
+      →    selected id=lst_006
+suggest_outfit received id=lst_006
+[4] suggest_outfit
+      in:  new_item=lst_006, wardrobe=10 items
+      out: Outfit 1: Pair the graphic tee with your baggy dark-wash jeans, black combat boots, and black crossbody bag fo…
+[5] create_fit_card
+      in:  new_item=lst_006, outfit='Outfit 1: Pair the graphic tee with your baggy dark-wash jea'
+      out: Found this graphic tee in good condition and knew I had to grab it. Scored it on depop for just $24. Can't wai…
+[6] done
+      →    all three tools ran, returning the session
+  try 3: completed — fit card 195 chars
+[1] parse_query (regex)
+      in:  vintage graphic tee under $30
+      out: description='vintage graphic tee', size=None, max_price=30.0
+[2] search_listings (via MCP)
+      in:  description='vintage graphic tee', size=None, max_price=30.0
+      out: 10 items: Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey, Y2K Baby Tee — Butterfly Print … +7 more
+      →    branch: 10 results, continuing; prices=[24.0, 19.0, 18.0, 26.0, 20.0, 15.0, 18.0, 25.0, 22.0, 27.0]
+[3] select_item
+      in:  search_results[0]
+      out: Graphic Tee — 2003 Tour Bootleg Style ($24.0, depop)
+      →    selected id=lst_006
+suggest_outfit received id=lst_006
+[4] suggest_outfit
+      in:  new_item=lst_006, wardrobe=10 items
+      out: Outfit 1 (Grunge Streetwear): Pair the graphic tee with your baggy straight-leg dark jeans, chunky white sneak…
+[5] create_fit_card
+      in:  new_item=lst_006, outfit='Outfit 1 (Grunge Streetwear): Pair the graphic tee with your'
+      out: Scored this 2003 tour bootleg style graphic tee on depop for just $24 and I'm obsessed. It's in such good cond…
+[6] done
+      →    all three tools ran, returning the session
+  try 4: completed — fit card 212 chars
+[1] parse_query (regex)
+      in:  vintage graphic tee under $30
+      out: description='vintage graphic tee', size=None, max_price=30.0
+[2] search_listings (via MCP)
+      in:  description='vintage graphic tee', size=None, max_price=30.0
+      out: 10 items: Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey, Y2K Baby Tee — Butterfly Print … +7 more
+      →    branch: 10 results, continuing; prices=[24.0, 19.0, 18.0, 26.0, 20.0, 15.0, 18.0, 25.0, 22.0, 27.0]
+[3] select_item
+      in:  search_results[0]
+      out: Graphic Tee — 2003 Tour Bootleg Style ($24.0, depop)
+      →    selected id=lst_006
+suggest_outfit received id=lst_006
+[4] suggest_outfit
+      in:  new_item=lst_006, wardrobe=10 items
+      out: Outfit 1 (Edgy Streetwear): Pair the graphic tee with your baggy dark wash jeans and black combat boots. Layer…
+[5] create_fit_card
+      in:  new_item=lst_006, outfit='Outfit 1 (Edgy Streetwear): Pair the graphic tee with your b'
+      out: Scored this 2003 tour bootleg style graphic tee on depop for just $24. It’s in seriously good shape and looks …
+[6] done
+      →    all three tools ran, returning the session
+  try 5: completed — fit card 213 chars
+
+c3/c4 denim jacket  (example wardrobe)
+  query: denim jacket under $50
+[1] parse_query (regex)
+      in:  denim jacket under $50
+      out: description='denim jacket', size=None, max_price=50.0
+[2] search_listings (via MCP)
+      in:  description='denim jacket', size=None, max_price=50.0
+      out: 7 items: Denim Jacket — Light Wash, Cropped, 90s Track Jacket — Navy/White Stripe, High-Waisted Denim Shorts — Cutoff … +4 more
+      →    branch: 7 results, continuing; prices=[42.0, 45.0, 24.0, 27.0, 38.0, 33.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      →    selected id=lst_007
+suggest_outfit received id=lst_007
+[4] suggest_outfit
+      in:  new_item=lst_007, wardrobe=10 items
+      out: Outfit 1: Pair the light wash cropped denim jacket with your white ribbed tank top, baggy dark-wash straight-l…
+[5] create_fit_card
+      in:  new_item=lst_007, outfit='Outfit 1: Pair the light wash cropped denim jacket with your'
+      out: Scored this light wash cropped denim jacket on poshmark for only $42 and the condition is literally spotless. …
+[6] done
+      →    all three tools ran, returning the session
+  try 1: completed — fit card 262 chars
+[1] parse_query (regex)
+      in:  denim jacket under $50
+      out: description='denim jacket', size=None, max_price=50.0
+[2] search_listings (via MCP)
+      in:  description='denim jacket', size=None, max_price=50.0
+      out: 7 items: Denim Jacket — Light Wash, Cropped, 90s Track Jacket — Navy/White Stripe, High-Waisted Denim Shorts — Cutoff … +4 more
+      →    branch: 7 results, continuing; prices=[42.0, 45.0, 24.0, 27.0, 38.0, 33.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      →    selected id=lst_007
+suggest_outfit received id=lst_007
+[4] suggest_outfit
+      in:  new_item=lst_007, wardrobe=10 items
+      out: Outfit 1: Pair the cropped light wash denim jacket with the white ribbed tank top, high-waisted baggy dark was…
+[5] create_fit_card
+      in:  new_item=lst_007, outfit='Outfit 1: Pair the cropped light wash denim jacket with the '
+      out: Just scored this light wash cropped denim jacket on poshmark for only $42! It's in amazing condition and is go…
+[6] done
+      →    all three tools ran, returning the session
+  try 2: completed — fit card 210 chars
+[1] parse_query (regex)
+      in:  denim jacket under $50
+      out: description='denim jacket', size=None, max_price=50.0
+[2] search_listings (via MCP)
+      in:  description='denim jacket', size=None, max_price=50.0
+      out: 7 items: Denim Jacket — Light Wash, Cropped, 90s Track Jacket — Navy/White Stripe, High-Waisted Denim Shorts — Cutoff … +4 more
+      →    branch: 7 results, continuing; prices=[42.0, 45.0, 24.0, 27.0, 38.0, 33.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      →    selected id=lst_007
+suggest_outfit received id=lst_007
+  [rate limit] service pushed back. Waiting 45s (attempt 1 of 5). This is the limiter doing its job, not a bug.
+  [rate limit] 15 requests used this minute. Waiting 2s. This is normal.
+[4] suggest_outfit
+      in:  new_item=lst_007, wardrobe=10 items
+      out: Outfit 1: Pair the cropped light wash denim jacket with the white ribbed tank top, baggy dark wash straight-le…
+[5] create_fit_card
+      in:  new_item=lst_007, outfit='Outfit 1: Pair the cropped light wash denim jacket with the '
+      out: Scored this cropped light wash denim jacket on poshmark and I'm obsessed with how it fits. It was only $42 and…
+[6] done
+      →    all three tools ran, returning the session
+  try 3: completed — fit card 253 chars
+[1] parse_query (regex)
+      in:  denim jacket under $50
+      out: description='denim jacket', size=None, max_price=50.0
+[2] search_listings (via MCP)
+      in:  description='denim jacket', size=None, max_price=50.0
+      out: 7 items: Denim Jacket — Light Wash, Cropped, 90s Track Jacket — Navy/White Stripe, High-Waisted Denim Shorts — Cutoff … +4 more
+      →    branch: 7 results, continuing; prices=[42.0, 45.0, 24.0, 27.0, 38.0, 33.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      →    selected id=lst_007
+suggest_outfit received id=lst_007
+[4] suggest_outfit
+      in:  new_item=lst_007, wardrobe=10 items
+      out: Outfit 1: Pair the light wash cropped denim jacket with the white ribbed tank top tucked into the baggy dark w…
+[5] create_fit_card
+      in:  new_item=lst_007, outfit='Outfit 1: Pair the light wash cropped denim jacket with the '
+      out: Obsessed with this light wash cropped denim jacket I just snagged on poshmark! It's in such good condition and…
+[6] done
+      →    all three tools ran, returning the session
+  try 4: completed — fit card 181 chars
+[1] parse_query (regex)
+      in:  denim jacket under $50
+      out: description='denim jacket', size=None, max_price=50.0
+[2] search_listings (via MCP)
+      in:  description='denim jacket', size=None, max_price=50.0
+      out: 7 items: Denim Jacket — Light Wash, Cropped, 90s Track Jacket — Navy/White Stripe, High-Waisted Denim Shorts — Cutoff … +4 more
+      →    branch: 7 results, continuing; prices=[42.0, 45.0, 24.0, 27.0, 38.0, 33.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      →    selected id=lst_007
+suggest_outfit received id=lst_007
+[4] suggest_outfit
+      in:  new_item=lst_007, wardrobe=10 items
+      out: Outfit 1: Pair the cropped light wash denim jacket with the white ribbed tank top tucked into the baggy dark w…
+[5] create_fit_card
+      in:  new_item=lst_007, outfit='Outfit 1: Pair the cropped light wash denim jacket with the '
+      out: Obsessed with how the light wash denim jacket looks layered over everything. Scored it in excellent condition …
+[6] done
+      →    all three tools ran, returning the session
+  try 5: completed — fit card 220 chars
+
+c3/c4 silk slip dress  (example wardrobe)
+  query: silk slip dress in midi length under $40
+[1] parse_query (regex)
+      in:  silk slip dress in midi length under $40
+      out: description='silk slip dress in midi length', size=None, max_price=40.0
+[2] search_listings (via MCP)
+      in:  description='silk slip dress in midi length', size=None, max_price=40.0
+      out: 5 items: 90s Silk Slip Dress — Floral, Midi Length, Silk Button-Down — Sage Green, Y2K Baby Tee — Butterfly Print … +2 more
+      →    branch: 5 results, continuing; prices=[30.0, 28.0, 18.0, 24.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: 90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      →    selected id=lst_013
+suggest_outfit received id=lst_013
+[4] suggest_outfit
+      in:  new_item=lst_013, wardrobe=10 items
+      out: Yes, buy it. It is a versatile 90s staple.   Outfit 1 (Edgy contrast): Layer your oversized grey crewneck swea…
+[5] create_fit_card
+      in:  new_item=lst_013, outfit='Yes, buy it. It is a versatile 90s staple. \n\nOutfit 1 (Edgy '
+      out: Still can’t believe I scored this 90s silk slip dress for only $30 on depop. It's in really good condition and…
+[6] done
+      →    all three tools ran, returning the session
+  try 1: completed — fit card 245 chars
+[1] parse_query (regex)
+      in:  silk slip dress in midi length under $40
+      out: description='silk slip dress in midi length', size=None, max_price=40.0
+[2] search_listings (via MCP)
+      in:  description='silk slip dress in midi length', size=None, max_price=40.0
+      out: 5 items: 90s Silk Slip Dress — Floral, Midi Length, Silk Button-Down — Sage Green, Y2K Baby Tee — Butterfly Print … +2 more
+      →    branch: 5 results, continuing; prices=[30.0, 28.0, 18.0, 24.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: 90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      →    selected id=lst_013
+suggest_outfit received id=lst_013
+[4] suggest_outfit
+      in:  new_item=lst_013, wardrobe=10 items
+      out: Yes, buy it. It is a versatile layering piece.   Outfit 1: Wear the silk slip dress over your white ribbed tan…
+[5] create_fit_card
+      in:  new_item=lst_013, outfit='Yes, buy it. It is a versatile layering piece. \n\nOutfit 1: W'
+      out: Found this gorgeous 90s floral silk midi on depop and I'm obsessed. It was only $30 and the condition is great…
+[6] done
+      →    all three tools ran, returning the session
+  try 2: completed — fit card 224 chars
+[1] parse_query (regex)
+      in:  silk slip dress in midi length under $40
+      out: description='silk slip dress in midi length', size=None, max_price=40.0
+[2] search_listings (via MCP)
+      in:  description='silk slip dress in midi length', size=None, max_price=40.0
+      out: 5 items: 90s Silk Slip Dress — Floral, Midi Length, Silk Button-Down — Sage Green, Y2K Baby Tee — Butterfly Print … +2 more
+      →    branch: 5 results, continuing; prices=[30.0, 28.0, 18.0, 24.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: 90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      →    selected id=lst_013
+suggest_outfit received id=lst_013
+[4] suggest_outfit
+      in:  new_item=lst_013, wardrobe=10 items
+      out: Buy it. It is super versatile.   Outfit 1 (Edgy Casual): Layer your oversized grey crewneck sweatshirt right o…
+[5] create_fit_card
+      in:  new_item=lst_013, outfit='Buy it. It is super versatile. \n\nOutfit 1 (Edgy Casual): Lay'
+      out: I am obsessed with this 90s floral midi slip dress I just scored on depop. It was only $30 and the condition i…
+[6] done
+      →    all three tools ran, returning the session
+  try 3: completed — fit card 192 chars
+[1] parse_query (regex)
+      in:  silk slip dress in midi length under $40
+      out: description='silk slip dress in midi length', size=None, max_price=40.0
+[2] search_listings (via MCP)
+      in:  description='silk slip dress in midi length', size=None, max_price=40.0
+      out: 5 items: 90s Silk Slip Dress — Floral, Midi Length, Silk Button-Down — Sage Green, Y2K Baby Tee — Butterfly Print … +2 more
+      →    branch: 5 results, continuing; prices=[30.0, 28.0, 18.0, 24.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: 90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      →    selected id=lst_013
+suggest_outfit received id=lst_013
+[4] suggest_outfit
+      in:  new_item=lst_013, wardrobe=10 items
+      out: Buy it. Layer your oversized grey crewneck sweatshirt right over the silk slip dress to create a cool contrast…
+[5] create_fit_card
+      in:  new_item=lst_013, outfit='Buy it. Layer your oversized grey crewneck sweatshirt right '
+      out: Scored this gorgeous 90s floral midi slip dress and I'm obsessed. It's in good condition and only cost me $30 …
+[6] done
+      →    all three tools ran, returning the session
+  try 4: completed — fit card 189 chars
+[1] parse_query (regex)
+      in:  silk slip dress in midi length under $40
+      out: description='silk slip dress in midi length', size=None, max_price=40.0
+[2] search_listings (via MCP)
+      in:  description='silk slip dress in midi length', size=None, max_price=40.0
+      out: 5 items: 90s Silk Slip Dress — Floral, Midi Length, Silk Button-Down — Sage Green, Y2K Baby Tee — Butterfly Print … +2 more
+      →    branch: 5 results, continuing; prices=[30.0, 28.0, 18.0, 24.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: 90s Silk Slip Dress — Floral, Midi Length ($30.0, depop)
+      →    selected id=lst_013
+suggest_outfit received id=lst_013
+[4] suggest_outfit
+      in:  new_item=lst_013, wardrobe=10 items
+      out: Yes, buy it! It is versatile and easily layered.   Outfit 1 (Edgy Casual): Layer your oversized grey crewneck …
+  [rate limit] 15 requests used this minute. Waiting 46s. This is normal.
+[5] create_fit_card
+      in:  new_item=lst_013, outfit='Yes, buy it! It is versatile and easily layered. \n\nOutfit 1 '
+      out: Found this gorgeous 90s floral silk slip dress on depop and I am obsessed. It was only $30 and the condition i…
+[6] done
+      →    all three tools ran, returning the session
+  try 5: completed — fit card 196 chars
+
+c3 track jacket size M  (example wardrobe)
+  query: 90s track jacket in size M
+[1] parse_query (regex)
+      in:  90s track jacket in size M
+      out: description='90s track jacket in', size='M', max_price=None
+[2] search_listings (via MCP)
+      in:  description='90s track jacket in', size='M', max_price=None
+      out: 5 items: 90s Track Jacket — Navy/White Stripe, 90s Leather Bomber — Black, 90s Silk Slip Dress — Floral, Midi Length … +2 more
+      →    branch: 5 results, continuing; prices=[45.0, 75.0, 30.0, 33.0, 14.0]
+[3] select_item
+      in:  search_results[0]
+      out: 90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      →    selected id=lst_004
+suggest_outfit received id=lst_004
+[4] suggest_outfit
+      in:  new_item=lst_004, wardrobe=10 items
+      out: Buy it.   Outfit 1: Layer the track jacket over your white ribbed tank top, paired with the baggy dark wash je…
+[5] create_fit_card
+      in:  new_item=lst_004, outfit='Buy it. \n\nOutfit 1: Layer the track jacket over your white r'
+      out: Found this incredible 90s track jacket in navy and white stripe on Poshmark and I'm obsessed. It was only $45 …
+[6] done
+      →    all three tools ran, returning the session
+  try 1: completed — fit card 226 chars
+[1] parse_query (regex)
+      in:  90s track jacket in size M
+      out: description='90s track jacket in', size='M', max_price=None
+[2] search_listings (via MCP)
+      in:  description='90s track jacket in', size='M', max_price=None
+      out: 5 items: 90s Track Jacket — Navy/White Stripe, 90s Leather Bomber — Black, 90s Silk Slip Dress — Floral, Midi Length … +2 more
+      →    branch: 5 results, continuing; prices=[45.0, 75.0, 30.0, 33.0, 14.0]
+[3] select_item
+      in:  search_results[0]
+      out: 90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      →    selected id=lst_004
+suggest_outfit received id=lst_004
+[4] suggest_outfit
+      in:  new_item=lst_004, wardrobe=10 items
+      out: Buy it. It’s a great streetwear piece that bridges your wardrobe.   Outfit 1 (Casual/Athletic): Pair the track…
+[5] create_fit_card
+      in:  new_item=lst_004, outfit='Buy it. It’s a great streetwear piece that bridges your ward'
+      out: Scored this navy and white 90s track jacket in excellent condition for just $45 on poshmark. It's such an easy…
+[6] done
+      →    all three tools ran, returning the session
+  try 2: completed — fit card 236 chars
+[1] parse_query (regex)
+      in:  90s track jacket in size M
+      out: description='90s track jacket in', size='M', max_price=None
+[2] search_listings (via MCP)
+      in:  description='90s track jacket in', size='M', max_price=None
+      out: 5 items: 90s Track Jacket — Navy/White Stripe, 90s Leather Bomber — Black, 90s Silk Slip Dress — Floral, Midi Length … +2 more
+      →    branch: 5 results, continuing; prices=[45.0, 75.0, 30.0, 33.0, 14.0]
+[3] select_item
+      in:  search_results[0]
+      out: 90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      →    selected id=lst_004
+suggest_outfit received id=lst_004
+[4] suggest_outfit
+      in:  new_item=lst_004, wardrobe=10 items
+      out: Buy it. It fits right into your current wardrobe.   Outfit 1 (Casual Streetwear): Pair the track jacket zipped…
+[5] create_fit_card
+      in:  new_item=lst_004, outfit='Buy it. It fits right into your current wardrobe. \n\nOutfit 1'
+      out: Scored this vintage 90s track jacket on poshmark and it is easily my new favorite layer. For just $45, the nav…
+[6] done
+      →    all three tools ran, returning the session
+  try 3: completed — fit card 261 chars
+[1] parse_query (regex)
+      in:  90s track jacket in size M
+      out: description='90s track jacket in', size='M', max_price=None
+[2] search_listings (via MCP)
+      in:  description='90s track jacket in', size='M', max_price=None
+      out: 5 items: 90s Track Jacket — Navy/White Stripe, 90s Leather Bomber — Black, 90s Silk Slip Dress — Floral, Midi Length … +2 more
+      →    branch: 5 results, continuing; prices=[45.0, 75.0, 30.0, 33.0, 14.0]
+[3] select_item
+      in:  search_results[0]
+      out: 90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      →    selected id=lst_004
+suggest_outfit received id=lst_004
+[4] suggest_outfit
+      in:  new_item=lst_004, wardrobe=10 items
+      out: Buy it. It fits right into your wardrobe.   Outfit 1: Pair the navy track jacket over the white ribbed tank to…
+[5] create_fit_card
+      in:  new_item=lst_004, outfit='Buy it. It fits right into your wardrobe. \n\nOutfit 1: Pair t'
+      out: Scored this 90s track jacket for just $45 over on poshmark and I'm honestly obsessed with how good the conditi…
+[6] done
+      →    all three tools ran, returning the session
+  try 4: completed — fit card 253 chars
+[1] parse_query (regex)
+      in:  90s track jacket in size M
+      out: description='90s track jacket in', size='M', max_price=None
+[2] search_listings (via MCP)
+      in:  description='90s track jacket in', size='M', max_price=None
+      out: 5 items: 90s Track Jacket — Navy/White Stripe, 90s Leather Bomber — Black, 90s Silk Slip Dress — Floral, Midi Length … +2 more
+      →    branch: 5 results, continuing; prices=[45.0, 75.0, 30.0, 33.0, 14.0]
+[3] select_item
+      in:  search_results[0]
+      out: 90s Track Jacket — Navy/White Stripe ($45.0, poshmark)
+      →    selected id=lst_004
+suggest_outfit received id=lst_004
+[4] suggest_outfit
+      in:  new_item=lst_004, wardrobe=10 items
+      out: Yes, buy it. It fits right into your wardrobe.  Outfit 1: Pair the 90s track jacket with your white ribbed tan…
+[5] create_fit_card
+      in:  new_item=lst_004, outfit='Yes, buy it. It fits right into your wardrobe.\n\nOutfit 1: Pa'
+      out: Just scored this 90s track jacket on poshmark for $45, and it’s honestly in such good shape. I'm already plann…
+[6] done
+      →    all three tools ran, returning the session
+  try 5: completed — fit card 253 chars
+
+c3 corduroy pants  (example wardrobe)
+  query: corduroy pants under $35
+[1] parse_query (regex)
+      in:  corduroy pants under $35
+      out: description='corduroy pants', size=None, max_price=35.0
+[2] search_listings (via MCP)
+      in:  description='corduroy pants', size=None, max_price=35.0
+      out: 2 items: Corduroy Wide-Leg Pants — Rust, Low-Rise Cargo Pants — Khaki
+      →    branch: 2 results, continuing; prices=[32.0, 27.0]
+[3] select_item
+      in:  search_results[0]
+      out: Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      →    selected id=lst_005
+suggest_outfit received id=lst_005
+[4] suggest_outfit
+      in:  new_item=lst_005, wardrobe=10 items
+      out: Yes, buy them! They fit your vintage, earth-tone aesthetic and add great texture.   Outfit 1 (Casual 70s): Pai…
+[5] create_fit_card
+      in:  new_item=lst_005, outfit='Yes, buy them! They fit your vintage, earth-tone aesthetic a'
+      out: Obsessed with these corduroy wide-leg pants in the absolute best rust shade. I just scored them on depop for $…
+[6] done
+      →    all three tools ran, returning the session
+  try 1: completed — fit card 220 chars
+[1] parse_query (regex)
+      in:  corduroy pants under $35
+      out: description='corduroy pants', size=None, max_price=35.0
+[2] search_listings (via MCP)
+      in:  description='corduroy pants', size=None, max_price=35.0
+      out: 2 items: Corduroy Wide-Leg Pants — Rust, Low-Rise Cargo Pants — Khaki
+      →    branch: 2 results, continuing; prices=[32.0, 27.0]
+[3] select_item
+      in:  search_results[0]
+      out: Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      →    selected id=lst_005
+suggest_outfit received id=lst_005
+[4] suggest_outfit
+      in:  new_item=lst_005, wardrobe=10 items
+      out: Buy them! They add a great 70s earth tone to your wardrobe.   Outfit 1 (Casual Vintage): Pair the rust corduro…
+[5] create_fit_card
+      in:  new_item=lst_005, outfit='Buy them! They add a great 70s earth tone to your wardrobe. '
+      out: Obsessed with these corduroy wide-leg pants in rust. I just snagged them on depop for $32. They add such a gre…
+[6] done
+      →    all three tools ran, returning the session
+  try 2: completed — fit card 145 chars
+[1] parse_query (regex)
+      in:  corduroy pants under $35
+      out: description='corduroy pants', size=None, max_price=35.0
+[2] search_listings (via MCP)
+      in:  description='corduroy pants', size=None, max_price=35.0
+      out: 2 items: Corduroy Wide-Leg Pants — Rust, Low-Rise Cargo Pants — Khaki
+      →    branch: 2 results, continuing; prices=[32.0, 27.0]
+[3] select_item
+      in:  search_results[0]
+      out: Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      →    selected id=lst_005
+suggest_outfit received id=lst_005
+  [rate limit] 15 requests used this minute. Waiting 46s. This is normal.
+[4] suggest_outfit
+      in:  new_item=lst_005, wardrobe=10 items
+      out: Buy them. They fit your vintage earth-tone vibe and pair easily with what you own.   Outfit 1: Pair the rust c…
+[5] create_fit_card
+      in:  new_item=lst_005, outfit='Buy them. They fit your vintage earth-tone vibe and pair eas'
+      out: Found these rust corduroy wide-leg pants on depop for $32 and I'm obsessed. They fit my vintage earth-tone vib…
+[6] done
+      →    all three tools ran, returning the session
+  try 3: completed — fit card 264 chars
+[1] parse_query (regex)
+      in:  corduroy pants under $35
+      out: description='corduroy pants', size=None, max_price=35.0
+[2] search_listings (via MCP)
+      in:  description='corduroy pants', size=None, max_price=35.0
+      out: 2 items: Corduroy Wide-Leg Pants — Rust, Low-Rise Cargo Pants — Khaki
+      →    branch: 2 results, continuing; prices=[32.0, 27.0]
+[3] select_item
+      in:  search_results[0]
+      out: Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      →    selected id=lst_005
+suggest_outfit received id=lst_005
+[4] suggest_outfit
+      in:  new_item=lst_005, wardrobe=10 items
+      out: Buy them. Pair the rust corduroy pants with your white ribbed tank top, layered under the oversized grey crewn…
+[5] create_fit_card
+      in:  new_item=lst_005, outfit='Buy them. Pair the rust corduroy pants with your white ribbe'
+      out: Finally scored these amazing rust corduroy wide-leg pants on depop and they are in such good condition. They o…
+[6] done
+      →    all three tools ran, returning the session
+  try 4: completed — fit card 264 chars
+[1] parse_query (regex)
+      in:  corduroy pants under $35
+      out: description='corduroy pants', size=None, max_price=35.0
+[2] search_listings (via MCP)
+      in:  description='corduroy pants', size=None, max_price=35.0
+      out: 2 items: Corduroy Wide-Leg Pants — Rust, Low-Rise Cargo Pants — Khaki
+      →    branch: 2 results, continuing; prices=[32.0, 27.0]
+[3] select_item
+      in:  search_results[0]
+      out: Corduroy Wide-Leg Pants — Rust ($32.0, depop)
+      →    selected id=lst_005
+suggest_outfit received id=lst_005
+[4] suggest_outfit
+      in:  new_item=lst_005, wardrobe=10 items
+      out: Yes, buy them. They add great color and texture to your wardrobe.   Outfit 1: Pair the rust corduroy pants wit…
+[5] create_fit_card
+      in:  new_item=lst_005, outfit='Yes, buy them. They add great color and texture to your ward'
+      out: Found these rust corduroy wide-leg pants on depop for $32 and they are so good. They add the best color and te…
+[6] done
+      →    all three tools ran, returning the session
+  try 5: completed — fit card 165 chars
+
+c2 impossible query  (example wardrobe)
+  query: designer ballgown size XXS under $5
+[1] parse_query (regex)
+      in:  designer ballgown size XXS under $5
+      out: description='designer ballgown', size='XXS', max_price=5.0
+[2] search_listings (via MCP)
+      in:  description='designer ballgown', size='XXS', max_price=5.0
+      out: [] (empty)
+      →    branch: empty, stopping before suggest_outfit
+  try 1: stopped early — Nothing matched 'designer ballgown' (size XXS, under $5). Yo
+[1] parse_query (regex)
+      in:  designer ballgown size XXS under $5
+      out: description='designer ballgown', size='XXS', max_price=5.0
+[2] search_listings (via MCP)
+      in:  description='designer ballgown', size='XXS', max_price=5.0
+      out: [] (empty)
+      →    branch: empty, stopping before suggest_outfit
+  try 2: stopped early — Nothing matched 'designer ballgown' (size XXS, under $5). Yo
+[1] parse_query (regex)
+      in:  designer ballgown size XXS under $5
+      out: description='designer ballgown', size='XXS', max_price=5.0
+[2] search_listings (via MCP)
+      in:  description='designer ballgown', size='XXS', max_price=5.0
+      out: [] (empty)
+      →    branch: empty, stopping before suggest_outfit
+  try 3: stopped early — Nothing matched 'designer ballgown' (size XXS, under $5). Yo
+[1] parse_query (regex)
+      in:  designer ballgown size XXS under $5
+      out: description='designer ballgown', size='XXS', max_price=5.0
+[2] search_listings (via MCP)
+      in:  description='designer ballgown', size='XXS', max_price=5.0
+      out: [] (empty)
+      →    branch: empty, stopping before suggest_outfit
+  try 4: stopped early — Nothing matched 'designer ballgown' (size XXS, under $5). Yo
+[1] parse_query (regex)
+      in:  designer ballgown size XXS under $5
+      out: description='designer ballgown', size='XXS', max_price=5.0
+[2] search_listings (via MCP)
+      in:  description='designer ballgown', size='XXS', max_price=5.0
+      out: [] (empty)
+      →    branch: empty, stopping before suggest_outfit
+  try 5: stopped early — Nothing matched 'designer ballgown' (size XXS, under $5). Yo
+
+c5 tee under $15  (example wardrobe)
+  query: tee under $15
+[1] parse_query (regex)
+      in:  tee under $15
+      out: description='tee', size=None, max_price=15.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=15.0
+      out: 1 items: Mesh Long-Sleeve Top — Black
+      →    branch: 1 results, continuing; prices=[15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Mesh Long-Sleeve Top — Black ($15.0, depop)
+      →    selected id=lst_017
+suggest_outfit received id=lst_017
+[4] suggest_outfit
+      in:  new_item=lst_017, wardrobe=10 items
+      out: Yes, buy it. It is a great layering piece that fits your grunge-goth style.   Outfit 1: Layer the black mesh l…
+[5] create_fit_card
+      in:  new_item=lst_017, outfit='Yes, buy it. It is a great layering piece that fits your gru'
+      out: Scored this black mesh long-sleeve top in excellent condition on depop and it was only $15. It's such an easy …
+[6] done
+      →    all three tools ran, returning the session
+  try 1: completed — fit card 218 chars
+[1] parse_query (regex)
+      in:  tee under $15
+      out: description='tee', size=None, max_price=15.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=15.0
+      out: 1 items: Mesh Long-Sleeve Top — Black
+      →    branch: 1 results, continuing; prices=[15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Mesh Long-Sleeve Top — Black ($15.0, depop)
+      →    selected id=lst_017
+suggest_outfit received id=lst_017
+[4] suggest_outfit
+      in:  new_item=lst_017, wardrobe=10 items
+      out: Buy it. It’s a great layering piece that fits your Y2K/grunge aesthetic.   Outfit 1 (Edgy & Casual): Layer the…
+[5] create_fit_card
+      in:  new_item=lst_017, outfit='Buy it. It’s a great layering piece that fits your Y2K/grung'
+      out: Found this black mesh long-sleeve top in excellent condition and knew I had to grab it. It's only $15 on depop…
+[6] done
+      →    all three tools ran, returning the session
+  try 2: completed — fit card 195 chars
+[1] parse_query (regex)
+      in:  tee under $15
+      out: description='tee', size=None, max_price=15.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=15.0
+      out: 1 items: Mesh Long-Sleeve Top — Black
+      →    branch: 1 results, continuing; prices=[15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Mesh Long-Sleeve Top — Black ($15.0, depop)
+      →    selected id=lst_017
+suggest_outfit received id=lst_017
+[4] suggest_outfit
+      in:  new_item=lst_017, wardrobe=10 items
+      out: Yes, buy it. It is a versatile layering piece that fits your grunge-y2k style.  Outfit 1 (Edgy Layering): Pair…
+[5] create_fit_card
+      in:  new_item=lst_017, outfit='Yes, buy it. It is a versatile layering piece that fits your'
+      out: Scored this black mesh long-sleeve top for just $15 on depop and it is in such good condition. It’s the ultima…
+[6] done
+      →    all three tools ran, returning the session
+  try 3: completed — fit card 253 chars
+[1] parse_query (regex)
+      in:  tee under $15
+      out: description='tee', size=None, max_price=15.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=15.0
+      out: 1 items: Mesh Long-Sleeve Top — Black
+      →    branch: 1 results, continuing; prices=[15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Mesh Long-Sleeve Top — Black ($15.0, depop)
+      →    selected id=lst_017
+suggest_outfit received id=lst_017
+[4] suggest_outfit
+      in:  new_item=lst_017, wardrobe=10 items
+      out: Yes, buy it. It fits your Y2K/grunge aesthetic and expands your layering options.   Outfit 1 (Grunge/Y2K): Lay…
+[5] create_fit_card
+      in:  new_item=lst_017, outfit='Yes, buy it. It fits your Y2K/grunge aesthetic and expands y'
+      out: Found this gorgeous black mesh long-sleeve top on depop for just $15, and the condition is amazing. It's such …
+[6] done
+      →    all three tools ran, returning the session
+  try 4: completed — fit card 247 chars
+[1] parse_query (regex)
+      in:  tee under $15
+      out: description='tee', size=None, max_price=15.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=15.0
+      out: 1 items: Mesh Long-Sleeve Top — Black
+      →    branch: 1 results, continuing; prices=[15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Mesh Long-Sleeve Top — Black ($15.0, depop)
+      →    selected id=lst_017
+suggest_outfit received id=lst_017
+[4] suggest_outfit
+      in:  new_item=lst_017, wardrobe=10 items
+      out: Buy it. It is a great layering piece that fits your grunge-y2k style.   Outfit 1 (Edgy Casual): Pair the black…
+  [rate limit] 15 requests used this minute. Waiting 44s. This is normal.
+[5] create_fit_card
+      in:  new_item=lst_017, outfit='Buy it. It is a great layering piece that fits your grunge-y'
+      out: Found this amazing black mesh long-sleeve top and I am so obsessed with it. It’s in excellent condition and wa…
+[6] done
+      →    all three tools ran, returning the session
+  try 5: completed — fit card 180 chars
+
+c5 tee under $20  (example wardrobe)
+  query: tee under $20
+[1] parse_query (regex)
+      in:  tee under $20
+      out: description='tee', size=None, max_price=20.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=20.0
+      out: 3 items: Y2K Baby Tee — Butterfly Print, Vintage Band Tee — Faded Grey, Mesh Long-Sleeve Top — Black
+      →    branch: 3 results, continuing; prices=[18.0, 19.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Yes, buy it. It fits right into your Y2K aesthetic and bridges your wardrobe nicely.  Outfit 1 (Casual Y2K): P…
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Yes, buy it. It fits right into your Y2K aesthetic and bridg'
+      out: Finally found the butterfly baby tee of my dreams on depop. It's in amazing shape and only cost me $18. I'm ob…
+[6] done
+      →    all three tools ran, returning the session
+  try 1: completed — fit card 182 chars
+[1] parse_query (regex)
+      in:  tee under $20
+      out: description='tee', size=None, max_price=20.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=20.0
+      out: 3 items: Y2K Baby Tee — Butterfly Print, Vintage Band Tee — Faded Grey, Mesh Long-Sleeve Top — Black
+      →    branch: 3 results, continuing; prices=[18.0, 19.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Outfit 1: Pair the butterfly baby tee with your baggy dark wash jeans and chunky white sneakers. Add the black…
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Outfit 1: Pair the butterfly baby tee with your baggy dark w'
+      out: Found this Y2K butterfly print baby tee in amazing shape and had to grab it. It's listed on depop for just $18…
+[6] done
+      →    all three tools ran, returning the session
+  try 2: completed — fit card 145 chars
+[1] parse_query (regex)
+      in:  tee under $20
+      out: description='tee', size=None, max_price=20.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=20.0
+      out: 3 items: Y2K Baby Tee — Butterfly Print, Vintage Band Tee — Faded Grey, Mesh Long-Sleeve Top — Black
+      →    branch: 3 results, continuing; prices=[18.0, 19.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Yes, buy it! It bridges your Y2K and casual wardrobe effortlessly.  Outfit 1 (Casual Y2K): Pair the butterfly …
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Yes, buy it! It bridges your Y2K and casual wardrobe effortl'
+      out: Look at this adorable butterfly print baby tee I just found! It was only $18 on depop and is in excellent cond…
+[6] done
+      →    all three tools ran, returning the session
+  try 3: completed — fit card 204 chars
+[1] parse_query (regex)
+      in:  tee under $20
+      out: description='tee', size=None, max_price=20.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=20.0
+      out: 3 items: Y2K Baby Tee — Butterfly Print, Vintage Band Tee — Faded Grey, Mesh Long-Sleeve Top — Black
+      →    branch: 3 results, continuing; prices=[18.0, 19.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Buy it. It’s a great versatile piece that balances your existing bottoms.   Outfit 1: Pair the baby tee with y…
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Buy it. It’s a great versatile piece that balances your exis'
+      out: Look at this Y2K baby tee with the cutest butterfly print that I just scored on depop! It was only $18 and is …
+[6] done
+      →    all three tools ran, returning the session
+  try 4: completed — fit card 195 chars
+[1] parse_query (regex)
+      in:  tee under $20
+      out: description='tee', size=None, max_price=20.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=20.0
+      out: 3 items: Y2K Baby Tee — Butterfly Print, Vintage Band Tee — Faded Grey, Mesh Long-Sleeve Top — Black
+      →    branch: 3 results, continuing; prices=[18.0, 19.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Yes, buy it! It bridges your Y2K and cottagecore vibes effortlessly.   Outfit 1 (Casual Y2K): Pair the butterf…
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Yes, buy it! It bridges your Y2K and cottagecore vibes effor'
+      out: Found this Y2K butterfly print baby tee on depop and I am obsessed. It's in amazing shape and was only $18. Su…
+[6] done
+      →    all three tools ran, returning the session
+  try 5: completed — fit card 144 chars
+
+c5 tee under $25  (example wardrobe)
+  query: tee under $25
+[1] parse_query (regex)
+      in:  tee under $25
+      out: description='tee', size=None, max_price=25.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=25.0
+      out: 4 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +1 more
+      →    branch: 4 results, continuing; prices=[18.0, 24.0, 19.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Buy it. It’s a great versatile piece that balances your wardrobe.   Outfit 1 (Casual street style): Pair the b…
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Buy it. It’s a great versatile piece that balances your ward'
+      out: I am obsessed with this butterfly print Y2K baby tee I just grabbed on depop. It was only $18 and is in such g…
+[6] done
+      →    all three tools ran, returning the session
+  try 1: completed — fit card 186 chars
+[1] parse_query (regex)
+      in:  tee under $25
+      out: description='tee', size=None, max_price=25.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=25.0
+      out: 4 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +1 more
+      →    branch: 4 results, continuing; prices=[18.0, 24.0, 19.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+  [rate limit] service pushed back. Waiting 34s (attempt 1 of 5). This is the limiter doing its job, not a bug.
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Buy it. It’s a great versatile piece for your wardrobe.   Outfit 1 (Casual Y2K): Pair the butterfly baby tee w…
+  [rate limit] 15 requests used this minute. Waiting 2s. This is normal.
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Buy it. It’s a great versatile piece for your wardrobe. \n\nOu'
+      out: Found this adorable Y2K baby tee with the cutest butterfly print and I'm obsessed. Snagged it on depop for jus…
+[6] done
+      →    all three tools ran, returning the session
+  try 2: completed — fit card 228 chars
+[1] parse_query (regex)
+      in:  tee under $25
+      out: description='tee', size=None, max_price=25.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=25.0
+      out: 4 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +1 more
+      →    branch: 4 results, continuing; prices=[18.0, 24.0, 19.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Buy it. It’s a great versatile piece that balances your wardrobe.   Outfit 1 (Casual Y2K): Pair the butterfly …
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Buy it. It’s a great versatile piece that balances your ward'
+      out: Found this Y2K butterfly print baby tee in excellent condition and I'm obsessed. It was only $18 on depop, so …
+[6] done
+      →    all three tools ran, returning the session
+  try 3: completed — fit card 185 chars
+[1] parse_query (regex)
+      in:  tee under $25
+      out: description='tee', size=None, max_price=25.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=25.0
+      out: 4 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +1 more
+      →    branch: 4 results, continuing; prices=[18.0, 24.0, 19.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Outfit 1: Pair the butterfly baby tee with your baggy dark wash straight-leg jeans, chunky white sneakers, and…
+  [rate limit] 15 requests used this minute. Waiting 11s. This is normal.
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Outfit 1: Pair the butterfly baby tee with your baggy dark w'
+      out: Still can't believe I found this butterfly print Y2K baby tee in such amazing condition. Scored it on depop fo…
+[6] done
+      →    all three tools ran, returning the session
+  try 4: completed — fit card 230 chars
+[1] parse_query (regex)
+      in:  tee under $25
+      out: description='tee', size=None, max_price=25.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=25.0
+      out: 4 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +1 more
+      →    branch: 4 results, continuing; prices=[18.0, 24.0, 19.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Buy it. It’s a great versatile piece that balances your wardrobe.   Outfit 1 (Casual Y2K): Pair the butterfly …
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Buy it. It’s a great versatile piece that balances your ward'
+      out: I am obsessed with this butterfly print Y2K baby tee I just picked up. It was only $18 on depop and came in am…
+[6] done
+      →    all three tools ran, returning the session
+  try 5: completed — fit card 186 chars
+
+c5 tee under $30  (example wardrobe)
+  query: tee under $30
+[1] parse_query (regex)
+      in:  tee under $30
+      out: description='tee', size=None, max_price=30.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=30.0
+      out: 5 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +2 more
+      →    branch: 5 results, continuing; prices=[18.0, 24.0, 19.0, 27.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Buy it.   Outfit 1: Pair the Y2K baby tee with your baggy dark-wash straight-leg jeans, chunky white sneakers,…
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Buy it. \n\nOutfit 1: Pair the Y2K baby tee with your baggy da'
+      out: Look at this adorable butterfly print Y2K baby tee I just listed on depop. It's in excellent condition and can…
+[6] done
+      →    all three tools ran, returning the session
+  try 1: completed — fit card 171 chars
+[1] parse_query (regex)
+      in:  tee under $30
+      out: description='tee', size=None, max_price=30.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=30.0
+      out: 5 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +2 more
+      →    branch: 5 results, continuing; prices=[18.0, 24.0, 19.0, 27.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Buy it! It is a great addition to your wardrobe.   Outfit 1 (Casual Y2K): Pair the butterfly baby tee with you…
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Buy it! It is a great addition to your wardrobe. \n\nOutfit 1 '
+      out: Found this adorable Y2K baby tee with a butterfly print and I am obsessed. It's in excellent condition and onl…
+[6] done
+      →    all three tools ran, returning the session
+  try 2: completed — fit card 179 chars
+[1] parse_query (regex)
+      in:  tee under $30
+      out: description='tee', size=None, max_price=30.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=30.0
+      out: 5 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +2 more
+      →    branch: 5 results, continuing; prices=[18.0, 24.0, 19.0, 27.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Yes, buy it!   Outfit 1: Pair the Y2K butterfly baby tee with your baggy dark-wash straight-leg jeans, chunky …
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Yes, buy it! \n\nOutfit 1: Pair the Y2K butterfly baby tee wit'
+      out: Found this gorgeous Y2K butterfly baby tee in excellent condition for just $18 on depop. I'm obsessed with the…
+[6] done
+      →    all three tools ran, returning the session
+  try 3: completed — fit card 216 chars
+[1] parse_query (regex)
+      in:  tee under $30
+      out: description='tee', size=None, max_price=30.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=30.0
+      out: 5 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +2 more
+      →    branch: 5 results, continuing; prices=[18.0, 24.0, 19.0, 27.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Yes, buy it!   Outfit 1: Pair the Y2K butterfly baby tee with your baggy dark-wash straight-leg jeans, chunky …
+  [rate limit] 15 requests used this minute. Waiting 33s. This is normal.
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Yes, buy it! \n\nOutfit 1: Pair the Y2K butterfly baby tee wit'
+      out: Found this absolute gem on depop for just $18! The butterfly print on this Y2K baby tee is too good to pass up…
+[6] done
+      →    all three tools ran, returning the session
+  try 4: completed — fit card 162 chars
+[1] parse_query (regex)
+      in:  tee under $30
+      out: description='tee', size=None, max_price=30.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=30.0
+      out: 5 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +2 more
+      →    branch: 5 results, continuing; prices=[18.0, 24.0, 19.0, 27.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+  [rate limit] 15 requests used this minute. Waiting 2s. This is normal.
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Yes, buy it! It bridges your Y2K and casual aesthetics.  Outfit 1 (Casual Y2K): Pair the butterfly baby tee wi…
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Yes, buy it! It bridges your Y2K and casual aesthetics.\n\nOut'
+      out: Found this amazing butterfly print Y2K baby tee on depop and I am obsessed. It was only $18 and is in such goo…
+[6] done
+      →    all three tools ran, returning the session
+  try 5: completed — fit card 196 chars
+
+c5 tee under $40  (example wardrobe)
+  query: tee under $40
+[1] parse_query (regex)
+      in:  tee under $40
+      out: description='tee', size=None, max_price=40.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=40.0
+      out: 5 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +2 more
+      →    branch: 5 results, continuing; prices=[18.0, 24.0, 19.0, 27.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Yes, buy it! It bridges your Y2K and casual pieces.   Outfit 1 (Casual Y2K): Pair the butterfly baby tee with …
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Yes, buy it! It bridges your Y2K and casual pieces. \n\nOutfit'
+      out: Obsessed with this Y2K baby tee and its cute butterfly print! I snagged it on depop for just $18 and the condi…
+[6] done
+      →    all three tools ran, returning the session
+  try 1: completed — fit card 199 chars
+[1] parse_query (regex)
+      in:  tee under $40
+      out: description='tee', size=None, max_price=40.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=40.0
+      out: 5 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +2 more
+      →    branch: 5 results, continuing; prices=[18.0, 24.0, 19.0, 27.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+  [rate limit] 15 requests used this minute. Waiting 11s. This is normal.
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Yes, buy it!   Outfit 1: Pair the Y2K butterfly baby tee with your baggy dark wash straight-leg jeans, chunky …
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Yes, buy it! \n\nOutfit 1: Pair the Y2K butterfly baby tee wit'
+      out: Found this cute Y2K butterfly baby tee in such good condition on depop! It was only $18, which is an absolute …
+[6] done
+      →    all three tools ran, returning the session
+  try 2: completed — fit card 191 chars
+[1] parse_query (regex)
+      in:  tee under $40
+      out: description='tee', size=None, max_price=40.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=40.0
+      out: 5 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +2 more
+      →    branch: 5 results, continuing; prices=[18.0, 24.0, 19.0, 27.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Yes, buy it! It bridges your Y2K and cottagecore vibes effortlessly.   Outfit 1 (Casual Y2K): Pair the butterf…
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Yes, buy it! It bridges your Y2K and cottagecore vibes effor'
+      out: Just scored this amazing butterfly print baby tee on depop for only $18! The condition is totally pristine, an…
+[6] done
+      →    all three tools ran, returning the session
+  try 3: completed — fit card 252 chars
+[1] parse_query (regex)
+      in:  tee under $40
+      out: description='tee', size=None, max_price=40.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=40.0
+      out: 5 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +2 more
+      →    branch: 5 results, continuing; prices=[18.0, 24.0, 19.0, 27.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Buy it! It is a great addition.  Outfit 1: Pair the Y2K baby tee with your baggy straight-leg dark wash jeans,…
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Buy it! It is a great addition.\n\nOutfit 1: Pair the Y2K baby'
+      out: Found this adorable Y2K baby tee with a butterfly print and I am obsessed. It's in excellent condition and onl…
+[6] done
+      →    all three tools ran, returning the session
+  try 4: completed — fit card 243 chars
+[1] parse_query (regex)
+      in:  tee under $40
+      out: description='tee', size=None, max_price=40.0
+[2] search_listings (via MCP)
+      in:  description='tee', size=None, max_price=40.0
+      out: 5 items: Y2K Baby Tee — Butterfly Print, Graphic Tee — 2003 Tour Bootleg Style, Vintage Band Tee — Faded Grey … +2 more
+      →    branch: 5 results, continuing; prices=[18.0, 24.0, 19.0, 27.0, 15.0]
+[3] select_item
+      in:  search_results[0]
+      out: Y2K Baby Tee — Butterfly Print ($18.0, depop)
+      →    selected id=lst_002
+suggest_outfit received id=lst_002
+[4] suggest_outfit
+      in:  new_item=lst_002, wardrobe=10 items
+      out: Buy it.   Outfit 1 (Casual Y2K): Pair the butterfly baby tee with your baggy dark wash straight-leg jeans, chu…
+[5] create_fit_card
+      in:  new_item=lst_002, outfit='Buy it. \n\nOutfit 1 (Casual Y2K): Pair the butterfly baby tee'
+      out: Found the cutest little butterfly baby tee on depop for just $18. The condition is amazing and it literally sc…
+[6] done
+      →    all three tools ran, returning the session
+  try 5: completed — fit card 182 chars
+
+empty wardrobe  (empty wardrobe)
+  query: denim jacket under $50
+[1] parse_query (regex)
+      in:  denim jacket under $50
+      out: description='denim jacket', size=None, max_price=50.0
+[2] search_listings (via MCP)
+      in:  description='denim jacket', size=None, max_price=50.0
+      out: 7 items: Denim Jacket — Light Wash, Cropped, 90s Track Jacket — Navy/White Stripe, High-Waisted Denim Shorts — Cutoff … +4 more
+      →    branch: 7 results, continuing; prices=[42.0, 45.0, 24.0, 27.0, 38.0, 33.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      →    selected id=lst_007
+suggest_outfit received id=lst_007
+[4] suggest_outfit
+      in:  new_item=lst_007, wardrobe=0 items
+      out: Pair this light wash cropped denim jacket with a classic white t-shirt and black high-waisted jeans for an eff…
+[5] create_fit_card
+      in:  new_item=lst_007, outfit='Pair this light wash cropped denim jacket with a classic whi'
+      out: I am so obsessed with this light wash cropped denim jacket I just picked up. It was only $42 on poshmark and c…
+[6] done
+      →    all three tools ran, returning the session
+  try 1: completed — fit card 217 chars
+[1] parse_query (regex)
+      in:  denim jacket under $50
+      out: description='denim jacket', size=None, max_price=50.0
+[2] search_listings (via MCP)
+      in:  description='denim jacket', size=None, max_price=50.0
+      out: 7 items: Denim Jacket — Light Wash, Cropped, 90s Track Jacket — Navy/White Stripe, High-Waisted Denim Shorts — Cutoff … +4 more
+      →    branch: 7 results, continuing; prices=[42.0, 45.0, 24.0, 27.0, 38.0, 33.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      →    selected id=lst_007
+suggest_outfit received id=lst_007
+  [rate limit] 15 requests used this minute. Waiting 32s. This is normal.
+[4] suggest_outfit
+      in:  new_item=lst_007, wardrobe=0 items
+      out: Buy it—it is a versatile staple. Pair it with basics you likely already own for two easy looks:  1. **Casual S…
+  [rate limit] 15 requests used this minute. Waiting 2s. This is normal.
+[5] create_fit_card
+      in:  new_item=lst_007, outfit='Buy it—it is a versatile staple. Pair it with basics you lik'
+      out: Just scored this light wash cropped denim jacket on poshmark and I'm obsessed. It was only $42 and honestly th…
+[6] done
+      →    all three tools ran, returning the session
+  try 2: completed — fit card 200 chars
+[1] parse_query (regex)
+      in:  denim jacket under $50
+      out: description='denim jacket', size=None, max_price=50.0
+[2] search_listings (via MCP)
+      in:  description='denim jacket', size=None, max_price=50.0
+      out: 7 items: Denim Jacket — Light Wash, Cropped, 90s Track Jacket — Navy/White Stripe, High-Waisted Denim Shorts — Cutoff … +4 more
+      →    branch: 7 results, continuing; prices=[42.0, 45.0, 24.0, 27.0, 38.0, 33.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      →    selected id=lst_007
+suggest_outfit received id=lst_007
+[4] suggest_outfit
+      in:  new_item=lst_007, wardrobe=0 items
+      out: Go for it—this is a timeless staple.   Outfit 1 (Casual Streetwear): Pair it with a plain white t-shirt, black…
+[5] create_fit_card
+      in:  new_item=lst_007, outfit='Go for it—this is a timeless staple. \n\nOutfit 1 (Casual Stre'
+      out: Just scored this amazing cropped light wash denim jacket on poshmark in excellent condition! It was only $42, …
+[6] done
+      →    all three tools ran, returning the session
+  try 3: completed — fit card 249 chars
+[1] parse_query (regex)
+      in:  denim jacket under $50
+      out: description='denim jacket', size=None, max_price=50.0
+[2] search_listings (via MCP)
+      in:  description='denim jacket', size=None, max_price=50.0
+      out: 7 items: Denim Jacket — Light Wash, Cropped, 90s Track Jacket — Navy/White Stripe, High-Waisted Denim Shorts — Cutoff … +4 more
+      →    branch: 7 results, continuing; prices=[42.0, 45.0, 24.0, 27.0, 38.0, 33.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      →    selected id=lst_007
+suggest_outfit received id=lst_007
+[4] suggest_outfit
+      in:  new_item=lst_007, wardrobe=0 items
+      out: Go for it! A cropped light wash denim jacket is a timeless, highly versatile staple.   Build two easy looks us…
+  [rate limit] 15 requests used this minute. Waiting 11s. This is normal.
+[5] create_fit_card
+      in:  new_item=lst_007, outfit='Go for it! A cropped light wash denim jacket is a timeless, '
+      out: Score this cropped light wash denim jacket for just $42 on poshmark! It's in excellent condition and ready to …
+[6] done
+      →    all three tools ran, returning the session
+  try 4: completed — fit card 203 chars
+[1] parse_query (regex)
+      in:  denim jacket under $50
+      out: description='denim jacket', size=None, max_price=50.0
+[2] search_listings (via MCP)
+      in:  description='denim jacket', size=None, max_price=50.0
+      out: 7 items: Denim Jacket — Light Wash, Cropped, 90s Track Jacket — Navy/White Stripe, High-Waisted Denim Shorts — Cutoff … +4 more
+      →    branch: 7 results, continuing; prices=[42.0, 45.0, 24.0, 27.0, 38.0, 33.0, 30.0]
+[3] select_item
+      in:  search_results[0]
+      out: Denim Jacket — Light Wash, Cropped ($42.0, poshmark)
+      →    selected id=lst_007
+suggest_outfit received id=lst_007
+[4] suggest_outfit
+      in:  new_item=lst_007, wardrobe=0 items
+      out: Buy it—it is a versatile closet staple. Pair it with common basics you likely already own for two easy looks: …
+[5] create_fit_card
+      in:  new_item=lst_007, outfit='Buy it—it is a versatile closet staple. Pair it with common '
+      out: Scored this light wash cropped denim jacket on poshmark for only $42 and it is seriously in amazing condition.…
+[6] done
+      →    all three tools ran, returning the session
+  try 5: completed — fit card 312 chars
+
+Wrote results/run_2026-10-17_1810_before.md
+112 model calls this session, 23330 prompt + 7962 output tokens
+
+Commit this file. It's the evidence the test actually happened.
