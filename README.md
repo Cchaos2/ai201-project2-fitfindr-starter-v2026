@@ -188,6 +188,35 @@ Scored these vintage Levi's 501 jeans in a great medium wash on depop for just $
 - *What came back:* It pointed out that my Returns line said "Each listing has id, title, description, etc.", and that a vague return value does not earn the points. 
 - *What I changed:* I rewrote the Returns line to list all eleven fields of a listing dict
 
+### Unit 4
+
+**Moment 3**
+
+- *What I asked for:* I asked Claude how to check criterion 3 (the item found
+  is the item passed on) using the trace I had just added.
+- *What came back:* It pointed out that the `new_item=` value in my
+  `suggest_outfit` trace step is read from the same `session["selected_item"]`
+  it would be compared against, so the check would compare a value with
+  itself and could never fail. The real evidence is the
+  `suggest_outfit received id=` line printed inside the tool, but
+  `run_eval.py` does not save stdout.
+- *What I changed:* I ran the eval as
+  `python -u run_eval.py ... | tee results/terminal_before.txt` so the tool's
+  own print is saved next to the trace, and scored criterion 3 from that file.
+
+**Moment 4**
+
+- *What I asked for:* I asked Claude to turn my five criteria into a scorer
+  (`score_run.py`) so 60 runs would be marked PASS/FAIL by the same rules
+  every time.
+- *What came back:* The first version marked all five criterion 2 tries as
+  FAIL. The check looked for the text "suggest_outfit" anywhere in the trace,
+  and my own branch note says "stopping before suggest_outfit".
+- *What I changed:* The check now looks only for a trace step that starts
+  with `[n] suggest_outfit`. Criterion 2 then scored 5/5, which matches the
+  trace. I spot-checked other rows by hand against the report, including the
+  one criterion 4 FAIL.
+
 <!-- ═══════════════════════ UNIT 4 — THE TEST ═══════════════════════
 
      Don't fill these in during unit 3.
@@ -516,29 +545,64 @@ full. -->
 
 ## The Improvement
 
-<!-- What you changed, why your diagnosis pointed at it, and the after-run in
-     the same table format. One change, measured properly.
+**What I changed:** one prompt, in `tools.py::create_fit_card`. The code now
+pulls the garment word out of the short part of the title (the words before
+"—", last word: "Graphic Tee" → `tee`, "Denim Jacket" → `jacket`,
+"90s Silk Slip Dress" → `dress`) and sends it to the model as its own line,
+`Garment word: dress`. The system prompt gained one rule: "Always name the
+item with the exact garment word given (for example 'tee', 'jacket',
+'dress'), even when you shorten the title." Nothing else changed: same search,
+loop, session, scenarios and scorer.
 
-     `python run_eval.py --label after` -->
-
-**What I changed:**
-
-**Which failure it was meant to fix:**
+**Which failure it was meant to fix:** row 4c, try 2 in Run Log — Before. The
+card called the dress a "90s floral silk midi" and never said "dress". The
+diagnosis was that the old prompt sent only the full title and said "Mention
+the item", so when the model shortened a long title it picked the noun
+itself, and "Midi" from after the dash replaced "Dress". The fix takes that
+choice away from the model.
 
 ### Run Log — After
 
+`python -u run_eval.py --label after 2>&1 | tee results/terminal_after.txt`,
+scored with `python score_run.py after`. Same scenarios, same scorer, cache
+off. 114 model calls, no crashes. Evidence:
+`results/run_2026-10-17_1920_after.md` and `results/terminal_after.txt`. Rows
+map to tries the same way as in Run Log — Before.
+
 | Criterion | Target | Try 1 | Try 2 | Try 3 | Try 4 | Try 5 | Verdict |
 |---|---|---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |  |  |
+| 1. A matching query completes all three tools | 4 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5) |
+| 2. An impossible query stops before the second tool | 5 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5) |
+| 3. The item found is the item passed on | 5 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5) |
+| 4a. Fit card facts + length — tee ($24, depop) | 4 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5) |
+| 4b. Fit card facts + length — jacket ($42, poshmark) | 4 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5) |
+| 4c. Fit card facts + length — dress ($30, depop) | 4 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5) |
+| 5. The search respects a price ceiling | 5 of 5 | PASS | PASS | PASS | PASS | PASS | MET (5/5) |
+
+**Real output — row 4c, try 4 after the change** (`tools.py::create_fit_card`):
+
+```
+Score this gorgeous floral midi dress for just $30 on depop. I love styling it with an oversized crewneck and combat boots for that perfect 90s grunge look. It's in great condition and ready for your next weekend outfit.
+```
+
+Before the change the model wrote "floral silk midi" with no garment noun.
+After it, it writes "floral midi dress": "midi" is still there, but now as an
+adjective in front of the garment word.
 
 **Did it help, and how do I know:**
-
-<!-- If it made things worse, say that. Honestly reported, that earns full
-     credit and is more interesting than one that worked. -->
+Yes, for the failure it targeted, as far
+as five tries can show. Row 4c went from 4/5 to 5/5: all five dress cards in
+the after-run contain "dress" ("90s silk slip dress", "floral dress",
+"floral midi dress"…), where before one in five did not. Rows 4a and 4b stayed
+at 5/5, so the new rule did not push out the price or platform or make the
+cards longer than four sentences, and rows 1, 2, 3 and 5 were unchanged. Two
+limits on that claim: the before-run had only one FAIL, and five tries cannot
+separate an item that keeps the garment word 95% of the time from one that
+keeps it 100% of the time, so this shows the observed failure did not repeat,
+not that it can't. And one side effect the criteria don't check: in try 2 the
+model pasted the full title word for word ("90s Silk Slip Dress — Floral, Midi
+Length"), which reads more like a listing than a post. The explicit garment
+line may have nudged it toward copying the title instead of paraphrasing it.
 
 
 
@@ -546,9 +610,20 @@ full. -->
 
 ## What's Still Broken
 
-<!-- For each criterion still missed: what you'd do, and why you stopped where
-     you did. "I ran out of time" is fine if it's true. Pretending nothing is
-     left is not. -->
+No criterion is still missed: all five were met before and after the change.
+But my tests didn't cover everything, and I found two problems.
+
+**1. Shoe sizes don't match.** Searching "platform sneakers size 8" finds
+nothing, even though there is a pair in size "US 8". The search treats "8"
+and "US 8" as different sizes, then wrongly tells the user to remove the
+size. *What I'd do:* make the search ignore the "US" part when comparing
+sizes.
+
+**2. My fix sometimes makes the caption copy the title.** After the change,
+one dress caption repeated the full listing title word for word, so it read
+more like a product listing than a real post. My criteria don't check for
+this. *What I'd do:* add a check that the caption doesn't repeat the full
+title, and adjust the prompt. 
 
 
 
