@@ -279,33 +279,74 @@ midi", so the garment-word check fails.
 
 ## Verdicts and Diagnoses
 
-<!-- MET or MISSED per criterion against LAST UNIT's target, plus a sentence on
-     how you decided.
-
-     Then, for every miss: which of the four places it happened — a tool, the
-     loop's branch, the session, or the model's output — AND the mechanism.
-
-     Not a diagnosis:  "The fit card was bad."
-     A diagnosis:      "The fit card criterion missed on 2 of 5 items. Both had
-                        an empty brand field. My prompt puts the brand in the
-                        first sentence, so the card opened with a blank and read
-                        like a fragment. The tool worked; the prompt assumed a
-                        field that isn't always there."
-
-     Look for a pattern. Three misses on the same tool is one problem, not
-     three. -->
+Verdicts are read against the targets in `criteria.md` (written in unit 3,
+before any results), using the counts in Run Log — Before. No criteria were
+revised: all five could be measured as written.
 
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | A matching query completes all three tools | 4 of 5 | MET (5/5) | All 5 tries of "vintage graphic tee under $30" ended at the `done` step with a non-empty fit card. 5 ≥ 4. |
+| 2 | An impossible query stops before the second tool | 5 of 5 | MET (5/5) | All 5 tries stopped after step 2 with `[] (empty)`, had no `suggest_outfit` step in the trace, and the message says what to change ("You could remove the size, or raise the price limit…"). |
+| 3 | The item found is the item passed on | 5 of 5 | MET (5/5) | For each of the 5 queries, in all 5 repeats, `selected id=` in the trace equalled `suggest_outfit received id=` printed inside the tool (lst_006, lst_007, lst_013, lst_004, lst_005). |
+| 4 | The fit card has the facts and is caption-length | 4 of 5 per item | MET (4a 5/5, 4b 5/5, 4c 4/5) | Each of the three items reached at least 4 of 5. The tee and the jacket passed every try; the dress failed try 2 on the garment word. |
+| 5 | The search respects a price ceiling | 5 of 5 | MET (5/5) | For all five ceilings, every returned price (logged as `prices=[...]` in the trace) was at or under N, in all 5 repeats. Highest returned vs ceiling: 15/$15, 19/$20, 24/$25, 27/$30, 27/$40. |
+
+**Arguing the opposite verdict on criterion 4.** Someone could say the 4c
+card ("90s floral silk midi") obviously describes the dress, so try 2 should
+count as a PASS and 4c is really 5/5. I kept it as a FAIL: the check was
+fixed before the run as "contains the garment word", and "midi" is not
+"dress". Either way the verdict is MET. Someone could also argue the other
+way: that 14 passes out of 15 is not "4 of 5". But the criterion says "per
+item", and each item was scored on its own five tries.
 
 **Diagnoses**
 
+No criterion was missed. There is one individual FAIL, and it is worth
+explaining because it is where criterion 4 nearly missed.
 
+*Row 4c, try 2 — place: the model's output in `tools.py::create_fit_card`.*
+The card said "Found this gorgeous 90s floral silk midi on depop…" and never
+used the word "dress". The prompt sends the full title as
+`Item: 90s Silk Slip Dress — Floral, Midi Length`. The system prompt only says
+"Mention the item… exactly once", and does not say which word has to survive.
+The model shortened the title and kept the descriptors ("90s", "floral",
+"silk") plus "midi" from the part after the dash, which it used as the noun
+instead of "dress". The tee and jacket titles put the garment word in their
+short first part ("Graphic Tee — …", "Denim Jacket — …"), so it survived every
+paraphrase. "Dress" sits in a longer title next to another word that can act
+as a noun ("Midi"), so it was the one that got dropped. The tool, the search
+and the session all worked; the prompt leaves the garment type up to the
+model's paraphrase.
+
+*Pattern.* Across all 60 runs, the only failure was in model output. The
+three criteria with no model in them (2, 3, 5) passed every try, and
+`generate.py` absorbed the two rate-limit pushbacks with retries, so none of
+the 55 runs that reached the model crashed or came back empty. Every bit of
+variation lives in the two model-calling tools, and the deterministic parts
+never varied.
+
+**Which target was set too low, and the tighter one**
+
+*Criterion 1 was set too low.* I allowed one miss in five because a model call
+could fail, hit the rate limit or come back empty. In the run that never
+happened: 5 of 5 here, and all 55 runs that reached the model completed. The
+rate limit was hit twice, and `generate.py` waited and retried both times,
+so a pushback slows a run down but does not fail it. The risk I reserved the
+miss for is already handled one layer down. Tighter target:
+**"Given each of five different matching queries, the agent completes all
+three tools and returns a fit card in 5 of 5 tries per query (25 of 25)."**
+
+*Criterion 5's target was at the maximum, but its condition was too easy.*
+It only tested one phrasing ("tee under $N"), and every ceiling had at least
+one tee under it, so the test could never reach the empty branch or the
+other price phrasings `_parse_query` claims to handle. Tighter version:
+**"For 'tee under $N', 'tee below $N', 'tee max $N' and 'tee $N' with
+N = 15, 20, 25, 30, 40, every returned price is ≤ N in 5 of 5 tries; and
+'tee under $10' returns no listings and stops before suggest_outfit, 5 of 5."**
+
+*Criterion 4 was not too low.* It is the one target that actually bit: 4c
+landed exactly on the 4 of 5 line. Raising it to 5 of 5 would turn this run
+into a miss, so the fix belongs in the prompt (Milestone 5), not in the target.
 
 ---
 
