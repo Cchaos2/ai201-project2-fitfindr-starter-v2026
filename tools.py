@@ -234,8 +234,13 @@ def create_fit_card(outfit: str, new_item: dict) -> str:
     if not outfit or not outfit.strip():
         return "No fit card: there was no outfit suggestion to write about."
 
+    title = new_item.get("title") or ""
+    garment = title.split("—")[0].split()[-1].lower() if title.strip() else ""
+    garment = garment or (new_item.get("category") or "piece")
+
     prompt = (
-        f"Item: {new_item.get('title')}\n"
+        f"Item: {title}\n"
+        f"Garment word: {garment}\n"
         f"Price: ${new_item.get('price'):g}\n"
         f"Platform: {new_item.get('platform')}\n"
         f"Condition: {new_item.get('condition')}\n"
@@ -246,7 +251,9 @@ def create_fit_card(outfit: str, new_item: dict) -> str:
         "You write short social captions about thrift finds. Rules: two to "
         "four sentences. Sound like a real person's post, not a product "
         "description. Mention the item, its price and the platform exactly "
-        "once each. Do not invent a brand or any detail not given."
+        "once each. Always name the item with the exact garment word given "
+        "(for example 'tee', 'jacket', 'dress'), even when you shorten the "
+        "title. Do not invent a brand or any detail not given."
     )
     text = generate(prompt, system=system)
     return text if text.strip() else "No fit card: the model returned nothing."
